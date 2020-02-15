@@ -23,6 +23,6 @@ For example:
 Uses: in my extension (Ship Editor sections) where users can name their ship like "69 is Legendary!" or "The 'Little' Hamster" and the modexport code return like
 ```js
 var 69_is_Legendary!_696 = '{/*something*/}';
-var The_'Little'_Hamster_969 = '{/*even more thing*/}'
+var The_'Little'_Hamster_969 = '{/*even more thing*/}';
 ```
-which will return the `Unexpected identifier error` when it came to Modding. So that how the code works: just edit the variable to a proper JS variable name :D
+which will return the `Unexpected identifier Error` when it came to Modding. So that how the code works: just edit the variable to a proper JS variable name :D
