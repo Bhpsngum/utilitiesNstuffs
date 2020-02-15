@@ -1,4 +1,4 @@
-# UltitiesNstuffs
+# Ultities and Stuffs
 Some funny codes that will be helpful in some specific cases
 
 Some of them are derived from my own extension and mod code, also from other sources if they're interesting
