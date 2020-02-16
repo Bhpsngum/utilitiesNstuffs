@@ -11,7 +11,7 @@ String.prototype.getProperJSVariableName=function(mode)
       s="'use strict';";
       break;
     default:
-      throw "ModeError: Unexpected token '"+mode+"'";
+      throw {name: "ModeError", message: "Unexpected token '"+mode+"'"};
   }
   try
   {
