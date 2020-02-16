@@ -3,21 +3,21 @@ Some funny codes that will be helpful in some specific cases
 
 Some of them are derived from my own extension and mod code, also from other sources if they're interesting
 
-## [getProperJSVariableName.js](getProperJSVariableName.js):
-Script link (use in html files): https://gitcdn.link/repo/Bhpsngum/UltitiesNstuffs/master/getProperJSVariableName.js
-Syntax: ```string.getProperVariableName(mode)``` where `mode` is "strict" or none
+## [getProperJSVariableName.min.js](getProperJSVariableName.js):
+Script link (use in html files): https://gitcdn.link/repo/Bhpsngum/UltitiesNstuffs/master/getProperJSVariableName.min.js
+Syntax: ```string.getProperJSVariableName(mode)``` where `mode` is "strict" or none
 
 Return value: a string that can be set as JS Variable from your input string 
 
 For example: 
 ```js
-> "It's my funny variable name".getProperVariableName()
+> "It's my funny variable name".getProperJSVariableName()
 "It_s_my_funny_variable_name"
-> "69 likes!".getProperVariableName()
+> "69 likes!".getProperJSVariableName()
 "_69_likes_"
-> "let".getProperVariableName()
+> "let".getProperJSVariableName()
 "let"
-> "let".getProperVariableName("strict")
+> "let".getProperJSVariableName("strict")
 "_let"
 ```
 Uses: in my extension (Ship Editor sections) where users can name their ship like "69 is Legendary!" or "The 'Little' Hamster" and the modexport code return like
