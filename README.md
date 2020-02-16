@@ -7,6 +7,8 @@ For convenience, i've put all of these script to https://bhpsngum.github.io, you
 ## [getProperJSVariableName.js](getProperJSVariableName.js):
 Script link (use in html files): https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs/getProperJSVariableName.min.js
 
+Language: JavaScript
+
 Syntax: ```string.getProperJSVariableName(mode)``` where `mode` is "strict" or none
 
 Return value: a string that can be set as JS Variable from your input string 
