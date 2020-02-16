@@ -5,6 +5,7 @@ Some of them are derived from my own extension and mod code, also from other sou
 
 ## [getProperJSVariableName.js](getProperJSVariableName.min.js):
 Script link (use in html files): https://gitcdn.link/repo/Bhpsngum/UltitiesNstuffs/master/getProperJSVariableName.js
+
 Syntax: ```string.getProperJSVariableName(mode)``` where `mode` is "strict" or none
 
 Return value: a string that can be set as JS Variable from your input string 
