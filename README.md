@@ -7,7 +7,7 @@ For convenience, i've put all of these script to https://bhpsngum.github.io, you
 ## [getProperJSVariableName.js](getProperJSVariableName.js):
 Script link (use in html files): https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs/getProperJSVariableName.min.js
 
-Language: JavaScript
+Language: JavaScript (ECMAScript)
 
 Syntax: ```string.getProperJSVariableName(mode)``` where `mode` is "strict" or none
 
