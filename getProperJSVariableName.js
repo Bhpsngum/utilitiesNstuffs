@@ -1,1 +1,45 @@
-String.prototype.getProperVariableName=function(mode){var invalidChar=["=","-","+",'"',"'","`","(",")","{","}","[","]","{","}","<",">",".",",",";",":","~","!","?","@","#","%","^","&","*","|","\\","/"],reservedWords=["break","case","catch","continue","debugger","default","delete","do","else","finally","for","function","if","in","instanceof","new","return","switch","this","throw","try","typeof","var","void","while","with","class","const","enum","export","extends","import","super","null","true","false"],reservedStrictWords=["implements","interface","let","package","private","protected","public","static","yield"],input=(this=="")?"unknown":(this.replace(/(\')/g,"\\'"));for(let e of reservedWords)if(input==e){input="_"+input;break}if("strict"==(mode||""))for(let e of reservedStrictWords)if(input==e){input="_"+input;break}var sample="var validChars = '"+input+"'.replace(/(\\s";for(let e of invalidChar)sample+="|\\"+e;return sample+=")/g,'_');",eval(sample),validChars.replace(/^(\d)/g,"_$1")};
+String.prototype.getProperJSVariableName=function(mode)
+{
+  let inp=((this||"")=="")?"_":(this.replace(/^(\d)/g,"_$1").replace(/(=|\n|\r|;)/g,"_"));
+  let s;
+  switch (mode||"")
+  {
+    case "":
+      s="";
+      break;
+    case "strict":
+      s="'use strict';";
+      break;
+    default:
+      throw "ModeError: Unexpected token '"+mode+"'";
+  }
+  try
+  {
+    eval(s+"var "+inp);
+  }
+  catch(e)
+  {
+    let err=0;
+    try
+    {
+      eval(s+"var _"+inp);
+    }
+    catch(er)
+    {
+      err=1;
+      for (let i=0;i<inp.length;i++)
+      {
+        try
+        {
+          eval("var "+inp.substring(0,i+1));
+        }
+        catch(errr)
+        {
+          inp=inp.substring(0,i)+"_"+inp.substring(i+1,inp.length);
+        }
+      }
+    }
+    if (err==0) inp="_"+inp;
+  }
+  return inp;
+}
