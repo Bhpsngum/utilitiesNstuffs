@@ -3,7 +3,7 @@ Some funny codes that will be helpful in some specific cases
 
 Some of them are derived from my own extension and mod code, also from other sources if they're interesting
 
-## [getProperJSVariableName.min.js](getProperJSVariableName.js):
+## [getProperJSVariableName.js](getProperJSVariableName.min.js):
 Script link (use in html files): https://gitcdn.link/repo/Bhpsngum/UltitiesNstuffs/master/getProperJSVariableName.min.js
 Syntax: ```string.getProperJSVariableName(mode)``` where `mode` is "strict" or none
 
