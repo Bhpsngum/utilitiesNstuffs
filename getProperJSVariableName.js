@@ -1,6 +1,6 @@
 String.prototype.getProperJSVariableName=function(mode)
 {
-  let inp=((this||"")=="")?"_":(this.replace(/^(\d)/g,"_$1").replace(/(=|\n|\r|\s|;)/g,"_"));
+  let inp=(this=="")?"_":(this.replace(/^(\d)/g,"_$1").replace(/(=|\n|\r|\s|;)/g,"_"));
   let s;
   switch (mode||"")
   {
