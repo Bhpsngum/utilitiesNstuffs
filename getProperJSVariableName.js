@@ -19,7 +19,7 @@ String.prototype.getProperJSVariableName=function(mode)
       s="'use strict';";
       break;
     default:
-      throw new ModeError("Unknown javascript mode '"+mode+"'");
+      throw new ModeError("Unexpected javascript mode '"+mode+"'");
   }
   try
   {
