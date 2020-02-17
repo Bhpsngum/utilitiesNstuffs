@@ -31,7 +31,7 @@ String.prototype.getProperJSVariableName=function(mode)
       {
         try
         {
-          eval("var "+inp.substring(0,i+1));
+          eval(s+"var "+inp.substring(0,i+1));
         }
         catch(errr)
         {
