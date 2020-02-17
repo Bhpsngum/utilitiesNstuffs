@@ -9,6 +9,8 @@ Script link (use in html files): https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNs
 
 Language: JavaScript (ECMAScript)
 
+Requirements: None
+
 Syntax: ```string.getProperJSVariableName(mode)``` where `mode` is "strict" or none
 
 Return value: a string that can be set as JS Variable from your input string 
