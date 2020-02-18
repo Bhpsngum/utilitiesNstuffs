@@ -1,12 +1,10 @@
 String.prototype.getProperJSVariableName=function(mode)
 {
-  class ModeError extends Error
+  CustomError = function(name,message)
   {
-    constructor(message)
-    {
-      super(message);
-      this.name="ModeError";
-    }
+    var a=new Error(message);
+    a.name=name;
+    return a;
   }
   let inp=(this=="")?"_":(this.replace(/^(\d)/g,"_$1").replace(/(=|\n|\r|\s|;)/g,"_"));
   let s;
@@ -19,7 +17,7 @@ String.prototype.getProperJSVariableName=function(mode)
       s="'use strict';";
       break;
     default:
-      throw new ModeError("Invalid javascript mode '"+mode+"'");
+      throw new CustomError("ModeError","Invalid javascript mode '"+mode+"'");
   }
   try
   {
