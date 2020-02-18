@@ -5,7 +5,7 @@ Some of them are derived from my own extension and mod code, also from other sou
 ## Where I can test them?
 For convenience, i've put all of these script to https://bhpsngum.github.io, you can visit this page to test them :D
 ## [getProperJSVariableName.js](getProperJSVariableName.js):
-Script link (use in html files): https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@latest/getProperJSVariableName.min.js
+Script link (use in html files): https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master/getProperJSVariableName.min.js
 
 Language: JavaScript (ECMAScript)
 
