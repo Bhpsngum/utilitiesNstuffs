@@ -1,5 +1,6 @@
 String.prototype.getProperJSVariableName=function(mode)
 {
+  let declare=["var","let"];
   CustomError = function(name,message)
   {
     var a=new Error(message);
@@ -21,14 +22,14 @@ String.prototype.getProperJSVariableName=function(mode)
   }
   try
   {
-    eval(s+"var "+inp);
+    for (let i of declare) eval(s+i+" "+inp);
   }
   catch(e)
   {
     let err=0;
     try
     {
-      eval(s+"var _"+inp);
+      for (let i of declare) eval(s+i+" _"+inp);
     }
     catch(er)
     {
@@ -37,7 +38,7 @@ String.prototype.getProperJSVariableName=function(mode)
       {
         try
         {
-          eval(s+"var "+inp.substring(0,i+1));
+          for (let i of declare) eval(s+i+" "+inp.substring(0,i+1));
         }
         catch(errr)
         {
