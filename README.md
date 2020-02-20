@@ -21,10 +21,10 @@ For example:
 "It_s_my_funny_variable_name"
 > "69 likes!".getProperJSVariableName()
 "_69_likes_"
-> "let".getProperJSVariableName()
-"let"
-> "let".getProperJSVariableName("strict")
-"_let"
+> "static".getProperJSVariableName()
+"static"
+> "static".getProperJSVariableName("strict")
+"_static"
 ```
 Uses: in my extension (Ship Editor sections) where users can name their ship like "69 is Legendary!" or "The 'Little' Hamster" and the modexport code return like
 ```js
