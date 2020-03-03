@@ -36,11 +36,26 @@ String.prototype.getProperJSVariableName=function(mode)
       err=1;
       for (let i=0;i<inp.length;i++)
       {
+        let reserved=0,illegalchar=0,errors=0;
         try
         {
-          for (let i of declare) eval(s+i+" "+inp.substring(0,i+1));
+          for (let index of declare) eval(s+index+" "+inp.substring(0,i+1));
         }
         catch(errr)
+        {
+          reserved=1;
+          illegalchar=1;
+          errors=1;
+        }
+        try
+        {
+          for (let index of declare) eval(s+index+" "+inp[i]);
+        }
+        catch(error)
+        {
+          reserved=0;
+        }
+        if (reserved === 0 && errors === 1 && illegalchar === 1)
         {
           inp=inp.substring(0,i)+"_"+inp.substring(i+1,inp.length);
         }
