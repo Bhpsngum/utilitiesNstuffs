@@ -26,6 +26,17 @@ For example:
 > "static".getProperJSVariableName("strict")
 "_static"
 ```
+or if you want to call it as a property, you can use `myString.properJSVariableName` of `myString.properStrictJSVariableName` instead:
+```js
+> "It's my funny variable name".properJSVariableName
+"It_s_my_funny_variable_name"
+> "69 likes!".properJSVariableName
+"_69_likes_"
+> "static".properJSVariableName
+"static"
+> "static".properStrictJSVariableName
+"_static"
+```
 Uses: in my extension (Ship Editor sections) where users can name their ship like "69 is Legendary!" or "The 'Little' Hamster" and the modexport code return like
 ```js
 var 69_is_Legendary!_696 = '{/*something*/}';
