@@ -1,7 +1,7 @@
 String.prototype.getProperJSVariableName=function(mode)
 {
   let declare=["var","let"];
-  CustomError = function(name,message)
+  window.CustomError = function(name,message)
   {
     var a=new Error(message);
     a.name=name;
