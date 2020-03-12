@@ -1,7 +1,7 @@
 String.prototype.getProperJSVariableName=function(mode)
 {
   let declare=["var","let"];
-  window.CustomError = function(name,message)
+  CustomError = function(name,message)
   {
     var a=new Error(message);
     a.name=name;
@@ -55,7 +55,7 @@ String.prototype.getProperJSVariableName=function(mode)
         {
           reserved=0;
         }
-        if (reserved === 0 && errors === 1 && illegalchar === 1)
+        if ((!reserved) && errors && illegalchar)
         {
           inp=inp.substring(0,i)+"_"+inp.substring(i+1,inp.length);
         }
