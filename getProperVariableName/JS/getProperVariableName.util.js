@@ -65,7 +65,7 @@ String.prototype.getProperJSVariableName=function(mode)
   }
   return inp;
 };
-Object.defineProperty(String.prototype, {
+Object.defineProperties(String.prototype, {
   properJSVariableName: {
     get() {return this.getProperJSVariableName();}
   },
