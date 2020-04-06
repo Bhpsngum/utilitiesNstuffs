@@ -24,7 +24,8 @@ For example:
 /newStringReplacer/JS/newStringReplacer.util.min.js
 ```
 * **Step 2:** Append with `https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master` to create an URL
-with the examples above, we will have these URLs:
+
+Combined with the examples above, we will have these URLs:
 ```
 https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master/properVariableName/JS/getProperJSVariableName.min.js
 https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master/newStringReplacer/JS/newStringReplacer.util.min.js
@@ -34,7 +35,7 @@ And you're done! :D
 
 * **Language:** Language(s) the code is running or supporting (usually JS :D )
 * **Requirements:** Some requirements when running those scripts (with the default one is the latest language version), these are maybe libraries, GPU cards, etc.
-* **Syntax:**: Syntax for that utility/stuff
+* **Syntax:** Syntax for that utility/stuff
 * **Return value:** The value returned after executing that utility/stuff
 
 There will be an example for easier understanding
