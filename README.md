@@ -43,7 +43,7 @@ There will be an example for easier understanding
 * **Uses:** In which part that utility/stuff is used
 * **Sensitive functions:** Some functions that you shouldn't modify so that the code can run properly (most of them are built-in functions)
 
-**Note:** if you're ensure that your project/codes won't mess up any built-in functions, you can see the utilized version below this part
+**Note:** if you're ensure that your project/codes won't mess up any built-in functions, you can use the utilized version below this part
 
 Got it? Now let's go! :D
 ## [getProperVariableName.js](/getProperVariableName/JS/getProperVariableName.js):
@@ -90,4 +90,4 @@ Error.prototype
 eval
 Object.defineProperties
 ```
-if you're ensure that your project/codes won't mess up any built-in functions, see the utilised version [here](/getProperVariableName/JS/getProperVariableName.util.js)
+if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/getProperVariableName/JS/getProperVariableName.util.js).
