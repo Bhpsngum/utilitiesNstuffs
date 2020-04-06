@@ -143,6 +143,8 @@ For example:
 test
 test
 test"
+> "1111111111".replace("1","g", function(result,index){return result+index})
+"10111213141516171819"
 > "This is a sample string for tHiS case-insensitive replacement".replace("this","gi","that")
 "that is a sample string for that case-insensitive replacement"
 ```
