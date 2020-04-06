@@ -5,7 +5,7 @@ String.prototype.replace= function(params)
     if ((args[0]||/test/g).test) return this.oldReplace(args[0],args[1]);
     else
     {
-        let finder=args[0].toString(),flags={},replaceparam,str=this.toString(),existflags="igmsbe";
+        let finder=args[0].toString(),flags={},replaceparam,str=this.toString(),existflags="igmsbe",special=(flags.m && flags.g) || flags.b || flags.e;
         switch(args.length)
         {
             case 1:
@@ -51,10 +51,29 @@ String.prototype.replace= function(params)
                     }
                     else
                     {
-                        if (st.slice(-1*finder.length)==finder) be=1;
+                        if (st.slice(-finder.length)==finder) be=1;
                     }
                 }
                 if (be) m[i]=st.oldReplace(finder,replaceparam);
+            }
+            if (!special)
+            {
+                let exist=1,newstr=st,splitstr="";
+                while (exist)
+                {
+                    exist=0;
+                    let index;
+                    newstr.oldReplace(finder,function(v,i){exist=1;index=i;});
+                    if (exist)
+                    {
+                        debugger;
+                        let parsed=(typeof replaceparam == "function")?replaceparam(result,index).toString():replaceparam.toString();
+                        splitstr+=newstr.slice(0,index)+parsed;
+                        newstr=newstr.slice(index+finder.length,newstr.length);
+                    }
+                    if (!flags.g) break;
+                }
+                m[i]=splitstr+newstr;
             }
             if (!flags.g) break;
         }
