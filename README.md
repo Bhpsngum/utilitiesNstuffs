@@ -10,7 +10,7 @@ For convenience, i've put all of these scripts to https://bhpsngum.github.io, yo
 
 * **Step 1:** Find the repo link to the file:
 
-For example: `/properVariableName/JS/getProperJSVariableName.js`
+For example: `/properVariableName/JS/getProperVariableName.js`
 
 if you want a minified version: insert `.min` before the file extension,
 
@@ -20,14 +20,14 @@ if you want a utilized version: insert `.util` before the file extension
 
 For example: 
 ```
-/properVariableName/JS/getProperJSVariableName.min.js
+/properVariableName/JS/getProperVariableName.min.js
 /newStringReplacer/JS/newStringReplacer.util.min.js
 ```
 * **Step 2:** Append with `https://cdn.jsdelivr.net/gh/Bhpsngum/utilitiesNstuffs@master` to create an URL
 
 Combined with the examples above, we will have these URLs:
 ```
-https://cdn.jsdelivr.net/gh/Bhpsngum/utilitiesNstuffs@master/properVariableName/JS/getProperJSVariableName.min.js
+https://cdn.jsdelivr.net/gh/Bhpsngum/utilitiesNstuffs@master/properVariableName/JS/getProperVariableName.min.js
 https://cdn.jsdelivr.net/gh/Bhpsngum/utilitiesNstuffs@master/newStringReplacer/JS/newStringReplacer.util.min.js
 ```
 And you're done! :D
