@@ -156,7 +156,7 @@ None
 `myString.replace(RegExp,replaceparam)` (casual funtion)
 
 `myString.replace(FinderString,flags,replaceparam)` (replace with non-RegExp finder) where:
-* **`FinderString`** : String (or non-RegExp) that need to be replaced
+* **`FinderString`** : String (or non-RegExp) in the string that need to be replaced
 * **`flags`** : flags for replacement preferences (must be a String).
 
   This parameter can be omitted
