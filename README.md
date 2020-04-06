@@ -105,10 +105,12 @@ JavaScript (ECMAScript)
 None
 
 ### Syntax
-`string.replace(RegExp,replaceparam)` (casual funtion)
-`string.replace(FinderString,flags,replaceparam)` (replace with non-RegExp finder) where:
+`myString.replace(RegExp,replaceparam)` (casual funtion)
+`myString.replace(FinderString,flags,replaceparam)` (replace with non-RegExp finder) where:
 * **`FinderString`**: String (or non-RegExp) that need to be replaced
-* **`flags`**: flags for replacement preferences (must be a String)
+* **`flags`**: flags for replacement preferences (must be a String).
+
+  This parameter can be omitted
 
   Available flags:
   * `g` : Global flag - finds every occurence of the word in a string
@@ -120,12 +122,41 @@ None
    **Notes:**
     * A combination of both `b` and `e` flags can be called as the "Full String comparison" (except when `m` flag is enabled)
     * `b` and `e` flags can be used for new line if `m` flag is enabled.
+* **`replaceparam`**: parameter which need to replace with the results, this can be a string or a function (like with RegExp replacement)
 
 ### Return value
 a replaced string
 
 For example: 
-
+```js
+> "12121212".replace("12","here")
+"here121212"
+> "12121212".replace("12","g","test")
+"testtesttesttest"
+> "12\n12\n12\n12".replace("12","gb","test")
+"test
+12
+12
+12"
+> "12\n12\n12\n12".replace("12","gmb","test")
+"test
+test
+test
+test"
+> "This is a sample string for tHiS case-insensitive replacement".replace("this","gi","that")
+"that is a sample string for that case-insensitive replacement"
+```
+or if you prefer using old replace function, use `string.oldReplace`
+```js
+> "121212".replace("12","alpha")
+"alpha1212"
+```
+and if you don't make sure that the script is loaded or not, use `myString.replace||myString.oldReplace`
+```js
+// <script> tag is isn't loaded yet!
+> ("uistui".replace||"uistui".oldReplace)("ui","fir")
+"firstui"
+```
 ### Uses
 for some cases that String replacement is more useful than Regular Expression replacement (like take input string, etc.)
 ### Sensitive functions
