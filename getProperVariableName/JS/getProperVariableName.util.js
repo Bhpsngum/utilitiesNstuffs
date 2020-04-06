@@ -7,7 +7,7 @@ String.prototype.getProperJSVariableName=function(mode)
     a.name=name;
     return a;
   }
-  let inp=(this=="")?"_":(this.replace(/^(\d)/g,"_$1").replace(/(=|\n|\r|\s|;)/g,"_"));
+  let inp=(this=="")?"_":(this.replace(/^(\d)/g,"_$1").replace(/(=|\n|\r|\s|;|,)/g,"_"));
   let s;
   switch (mode||"")
   {
@@ -39,7 +39,7 @@ String.prototype.getProperJSVariableName=function(mode)
         let reserved=0,illegalchar=0,errors=0;
         try
         {
-          for (let index of declare) eval(s+index+" "+inp.substring(0,i+1));
+          for (let index of declare) eval(s+index+" "+inp.slice(0,i+1));
         }
         catch(errr)
         {
@@ -57,7 +57,7 @@ String.prototype.getProperJSVariableName=function(mode)
         }
         if ((!reserved) && errors && illegalchar)
         {
-          inp=inp.substring(0,i)+"_"+inp.substring(i+1,inp.length);
+          inp=inp.slice(0,i)+"_"+inp.slice(i+1,inp.length);
         }
       }
     }
