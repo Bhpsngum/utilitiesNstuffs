@@ -48,16 +48,16 @@ There will be an example for easier understanding
 Got it? Now let's go! :D
 ## [getProperVariableName.js](/getProperVariableName/JS/getProperVariableName.js):
 
-###Language 
+### Language 
 JavaScript (ECMAScript)
 
-###Requirements 
+### Requirements 
 None
 
-###Syntax
+### Syntax
 ```string.getProperJSVariableName(mode)``` where `mode` is "strict" or none
 
-###Return value
+### Return value
 a string that can be set as JS Variable from your input string 
 
 For example: 
@@ -82,14 +82,14 @@ or if you want to call it as a property, you can use `myString.properJSVariableN
 > "static".properStrictJSVariableName
 "_static"
 ```
-###Uses
+### Uses
 in my extension (Ship Editor sections) where users can name their ship like "69 is Legendary!" or "The 'Little' Hamster" and the modexport code return like
 ```js
 var 69_is_Legendary!_696 = '{/*something*/}';
 var The_'Little'_Hamster_969 = '{/*even more thing*/}';
 ```
 which will return the `Unexpected identifier Error` when it came to Modding. So that how the code works: just edit the variable to a proper JS variable name :D
-###Sensitive functions
+### Sensitive functions
 ```js
 Error.prototype
 eval
@@ -98,22 +98,22 @@ Object.defineProperties
 if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/getProperVariableName/JS/getProperVariableName.util.js).
 ## [newStringReplacer.js](/newStringReplacer/JS/newStringReplacer.js):
 
-###Language
+### Language
 JavaScript (ECMAScript)
 
-###Requirements
+### Requirements
 None
 
-###Syntax
+### Syntax
 
-###Return value
+### Return value
 a replaced string
 
 For example: 
 
-###Uses
+### Uses
 for some cases that String replacement is more useful than Regular Expression replacement (like take input string, etc.)
-###Sensitive functions
+### Sensitive functions
 ```js
 String.prototype.replace (before script execution)
 *.prototype.toString
