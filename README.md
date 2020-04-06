@@ -153,10 +153,10 @@ or if you prefer using old replace function, use `string.oldReplace`
 > "121212".replace("12","alpha")
 "alpha1212"
 ```
-and if you don't make sure that the script is loaded or not, use `myString.replace||myString.oldReplace`
+and if you don't make sure that the script is loaded or not, use the method below:
 ```js
 // <script> tag is isn't loaded yet!
-> ("uistui".replace||"uistui".oldReplace)("ui","fir")
+> ("uistui".oldReplace)?"uistui".oldReplace("ui","fir"):"uistui".replace("ui","fir")
 "firstui"
 ```
 ### Uses
