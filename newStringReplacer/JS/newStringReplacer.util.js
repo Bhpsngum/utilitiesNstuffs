@@ -1,11 +1,37 @@
 String.prototype.oldReplace=String.prototype.replace;
 String.prototype.replace= function(params)
 {
+    function getIndex(array,n)
+    {
+        let index=0;
+        for (let i=0;i<n;i++) index+=array[i].length;
+        return index;
+    }
+    function caseinsensitivecompare(st1,st2,n)
+    {
+        return (n)?(st1.toUpperCase()==st2.toUpperCase()):(st1==st2);
+    }
+    function replace(st,finder,replaceparam,isGlobal,isCaseinSensitive,addIndex,startIndex)
+    {
+        let d=0,s=st;
+                for (let i=startIndex;i<=st.length-finder.length;i++)
+                {
+                    let result=st.slice(i,i+finder.length);
+                    if (caseinsensitivecompare(result,finder,isCaseinSensitive))
+                    {
+                        let parsed=(typeof replaceparam === "function")?(replaceparam(result,i+addIndex)||"undefined").toString():replaceparam.toString();
+                        s=s.slice(0,i+d)+parsed+s.slice(i+d+finder.length,s.length);
+                        d+=parsed.length-finder.length;
+                    }
+                    if (!isGlobal) break;
+                }
+                return s;
+    }
     let args=arguments;
     if ((args[0]||/test/g).test) return this.oldReplace(args[0],args[1]);
     else
     {
-        let finder=args[0].toString(),flags={},replaceparam,str=this.toString(),existflags="igmsbe",special=(flags.m && flags.g) || flags.b || flags.e;
+        let finder=args[0].toString(),flags={},replaceparam,str=this.toString(),existflags="igmsbe";
         switch(args.length)
         {
             case 1:
@@ -17,7 +43,7 @@ String.prototype.replace= function(params)
                 for (let flag of existflags) flags[flag]=args[1].toString().includes(flag);
                 replaceparam=args[2];
         }
-        let m;
+        let m=[str],special=(flags.m && flags.g) || flags.b || flags.e;
         if (flags.m && flags.g)
         {
             let preIndex=-1;
@@ -32,50 +58,34 @@ String.prototype.replace= function(params)
                 }
             }
         }
-        else m=[str];
+        let mm=[...m];
         for (let i=0;i<m.length;i+=2)
         {
             let st=m[i];
             if (flags.b || flags.e)
             {
-                let be=0;
+                let be=0,start=0;
                 if (flags.b && flags.e)
                 {
-                    if (st==finder) be=1;
+                    if (caseinsensitivecompare(st,finder,flags.i)) be=1;
                 }
                 else
                 {
-                    if (flags.b)
-                    {
-                        if (st.slice(0,finder.length)==finder) be=1;
-                    }
+                    let result;
+                    if (flags.b) result=st.slice(0,finder.length);
                     else
                     {
-                        if (st.slice(-finder.length)==finder) be=1;
+                        result=st.slice(-finder.length);
+                        start=st.length-finder.length;
+                        if (start<0) start=0;
                     }
+                    be= caseinsensitivecompare(result,finder,flags.i);
                 }
-                if (be) m[i]=st.oldReplace(finder,replaceparam);
+                if (be) mm[i]=replace(st,finder,replaceparam,0,flags.i,getIndex(m,i),start);
             }
-            if (!special)
-            {
-                let exist=1,newstr=st,splitstr="";
-                while (exist)
-                {
-                    exist=0;
-                    let index,result;
-                    newstr.oldReplace(finder,function(v,i){exist=1;result=v;index=i;});
-                    if (exist)
-                    {
-                        let parsed=(typeof replaceparam == "function")?(replaceparam(result,index)||"undefined").toString():replaceparam.toString();
-                        splitstr+=newstr.slice(0,index)+parsed;
-                        newstr=newstr.slice(index+finder.length,newstr.length);
-                    }
-                    if (!flags.g) break;
-                }
-                m[i]=splitstr+newstr;
-            }
+            if (!special) mm[i]=replace(st,finder,replaceparam,flags.g,flags.i,getIndex(m,i),0);
             if (!flags.g) break;
         }
-        return m.join("");
+        return mm.join("");
     }
 }
