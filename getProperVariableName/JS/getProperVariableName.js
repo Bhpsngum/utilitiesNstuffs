@@ -28,7 +28,7 @@ String.prototype.getProperJSVariableName=function(mode)
     switch(inp[i])
     {
       case "\n":
-      case "\r"
+      case "\r":
       case "=":
       case ";":
       case ",":
