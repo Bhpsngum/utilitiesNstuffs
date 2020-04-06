@@ -88,6 +88,6 @@ which will return the `Unexpected identifier Error` when it came to Modding. So 
 ```js
 Error.prototype
 eval
-Object.defineProperty
+Object.defineProperties
 ```
 if you're ensure that your project/codes won't mess up any built-in functions, see the utilised version [here](/getProperVariableName/JS/getProperVariableName.util.js)
