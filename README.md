@@ -119,7 +119,7 @@ a string that can be set as JS Variable from your input string
 > "static".getProperJSVariableName("strict")
 "_static"
 ```
-or if you want to call it as a property, you can use `myString.properJSVariableName` of `myString.properStrictJSVariableName` instead:
+or if you want to call it as a property, you can use `myString.properJSVariableName` or `myString.properStrictJSVariableName` instead:
 ```js
 > "It's my funny variable name".properJSVariableName
 "It_s_my_funny_variable_name"
