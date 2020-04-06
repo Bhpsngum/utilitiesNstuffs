@@ -55,7 +55,7 @@ JavaScript (ECMAScript)
 None
 
 ### Syntax
-```string.getProperJSVariableName(mode)``` where `mode` is "strict" or none
+```string.getProperJSVariableName(mode)``` where `mode` is "strict" or omitted
 
 ### Return value
 a string that can be set as JS Variable from your input string 
@@ -106,9 +106,10 @@ None
 
 ### Syntax
 `myString.replace(RegExp,replaceparam)` (casual funtion)
+
 `myString.replace(FinderString,flags,replaceparam)` (replace with non-RegExp finder) where:
-* **`FinderString`**: String (or non-RegExp) that need to be replaced
-* **`flags`**: flags for replacement preferences (must be a String).
+* **`FinderString`** : String (or non-RegExp) that need to be replaced
+* **`flags`** : flags for replacement preferences (must be a String).
 
   This parameter can be omitted
 
@@ -120,9 +121,9 @@ None
   * `i` : Case-insensitive - matched every results regardless of Lowercase or Uppercase form
   
    **Notes:**
-    * A combination of both `b` and `e` flags can be called as the "Full String comparison" (except when `m` flag is enabled)
+    * A combination of both `b` and `e` flags can be called as the "Full String replacement" (except when `m` flag is enabled)
     * `b` and `e` flags can be used for new line if `m` flag is enabled.
-* **`replaceparam`**: parameter which need to replace with the results, this can be a string or a function (like with RegExp replacement)
+* **`replaceparam`** : parameter which need to replace with the results, this can be a string or a function (like with RegExp replacement)
 
 ### Return value
 a replaced string
@@ -155,7 +156,7 @@ or if you prefer using old replace function, use `string.oldReplace`
 ```
 and if you don't make sure that the script is loaded or not, use the method below:
 ```js
-// <script> tag is isn't loaded yet!
+// <script> tag is is loaded... or not?
 > ("uistui".oldReplace)?"uistui".oldReplace("ui","fir"):"uistui".replace("ui","fir")
 "firstui"
 ```
