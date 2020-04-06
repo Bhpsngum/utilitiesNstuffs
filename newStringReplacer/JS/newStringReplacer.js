@@ -52,8 +52,8 @@ String.prototype.replace= function(params)
             {
                 if (str[i]=="\n" || str[i]=="\r" || i==str.length)
                 {
-                    m.push(str.slice(preIndex+1,i));
-                    m.push(str[i]||"");
+                    m[m.length]=str.slice(preIndex+1,i);
+                    m[m.length]=str[i]||"";
                     preIndex=i;
                 }
             }
