@@ -4,16 +4,57 @@ Some funny codes that will be helpful in some specific cases
 Some of them are derived from my own extension and mod code, also from other sources if they're interesting
 ## Where I can test them?
 For convenience, i've put all of these script to https://bhpsngum.github.io, you can visit this page to test them :D
+## How to get script link
+
+(for `<script>` tag in HTML files)
+
+* **Step 1:** Find the repo link to the file:
+
+For example: `/properVariableName/JS/getProperJSVariableName.js`
+
+if you want a minified version: insert `.min` before the file extension,
+
+if you want a utilized version: insert `.util` before the file extension
+
+**Note:** both of them can be combined to create a utilized & minified file
+
+For example: 
+```
+/properVariableName/JS/getProperJSVariableName.min.js
+/newStringReplacer/JS/newStringReplacer.util.min.js
+```
+* **Step 2:** Append with `https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master` to create an URL
+with the examples above, we will have these URLs:
+```
+https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master/properVariableName/JS/getProperJSVariableName.min.js
+https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master/newStringReplacer/JS/newStringReplacer.util.min.js
+```
+And you're done! :D
+## Structure for one utility/stuff explanation
+
+* **Language:** Language(s) the code is running or supporting (usually JS :D )
+* **Requirements:** Some requirements when running those scripts (with the default one is the latest language version), these are maybe libraries, GPU cards, etc.
+* **Syntax:**: Syntax for that utility/stuff
+* **Return value:** The value returned after executing that utility/stuff
+
+There will be an example for easier understanding
+
+* **Uses:** In which part that utility/stuff is used
+* **Sensitive functions:** Some functions that you shouldn't modify so that the code can run properly (most of them are built-in functions)
+
+**Note:** if you're ensure that your project/codes don't mess any built-in functions, you can see the utilized version below this part
+
+Got it? Now let's go! :D
 ## [getProperJSVariableName.js](/getProperVariableName/JS/getProperJSVariableName.js):
 Script link (use in html files): https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master/getProperJSVariableName.min.js
 
-Language: JavaScript (ECMAScript)
+* **Language:** JavaScript (ECMAScript)
 
-Requirements: None
+* **Requirements:** None
 
-Syntax: ```string.getProperJSVariableName(mode)``` where `mode` is "strict" or none
+* **Syntax:** ```string.getProperJSVariableName(mode)``` where `mode` is "strict" or none
 
-Return value: a string that can be set as JS Variable from your input string 
+* **Return value:** a string that can be set as JS Variable from your input string 
 
 For example: 
 ```js
@@ -37,9 +78,10 @@ or if you want to call it as a property, you can use `myString.properJSVariableN
 > "static".properStrictJSVariableName
 "_static"
 ```
-Uses: in my extension (Ship Editor sections) where users can name their ship like "69 is Legendary!" or "The 'Little' Hamster" and the modexport code return like
+* **Uses:** in my extension (Ship Editor sections) where users can name their ship like "69 is Legendary!" or "The 'Little' Hamster" and the modexport code return like
 ```js
 var 69_is_Legendary!_696 = '{/*something*/}';
 var The_'Little'_Hamster_969 = '{/*even more thing*/}';
 ```
 which will return the `Unexpected identifier Error` when it came to Modding. So that how the code works: just edit the variable to a proper JS variable name :D
+* **Sensitive functions**
