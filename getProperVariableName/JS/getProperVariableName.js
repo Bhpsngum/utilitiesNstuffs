@@ -7,6 +7,12 @@ String.prototype.getProperJSVariableName=function(mode)
     a.name=name;
     return a;
   }
+  function slice(str,firstIndex,lastIndex)
+  {
+    let st="";
+    for (let i=firstIndex;i<lastIndex;i++) st+=str[i];
+    return st;
+  }
   let inp=(this=="")?"_":this;
   switch(inp[0])
   {
@@ -33,15 +39,9 @@ String.prototype.getProperJSVariableName=function(mode)
       case ";":
       case ",":
       case " ":
-        inp[i]="_";
+        inp=slice(inp,0,i)+"_"+slice(inp,i+1,inp.length);
         break;
     }
-  }
-  function slice(str,firstIndex,lastIndex)
-  {
-    let st="";
-    for (let i=firstIndex;i<lastIndex;i++) st+=str[i];
-    return st;
   }
   let s;
   switch (mode||"")
