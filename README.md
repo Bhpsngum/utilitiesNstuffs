@@ -2,6 +2,32 @@
 Some funny codes that will be helpful in some specific cases
 
 Some of them are derived from my own extension and mod code, also from other sources if they're interesting
+
+Table of contents:
+
+  **[Where I can test them?](#where-i-can-test-them)**
+  
+  **[How to get script link](#how-to-get-script-link)**
+  
+  **[Structure for one utility/stuff explanation](#structure-for-one-utilitystuff-explanation)**
+  
+  **[getProperVariableName.js](#getpropervariablenamejs)**
+  
+  * **[Languages](#languages)**
+  * **[Requirements](#requirements)**
+  * **[Syntax](#syntax)**
+  * **[Return values](#return-values)**
+  * **[Examples](#examples)**
+  * **[Sensitive functions](#sensitive-functions)**
+  
+  **[newStringReplacer.js](#newstringreplacerjs)**
+  
+  * **[Languages](#languages-1)**
+  * **[Requirements](#requirements-1)**
+  * **[Syntax](#syntax-1)**
+  * **[Return values](#return-values-1)**
+  * **[Examples](#examples-1)**
+  * **[Sensitive functions](#sensitive-functions-1)**
 ## Where I can test them?
 For convenience, i've put all of these scripts to https://bhpsngum.github.io, you can visit this page to test them :D
 ## How to get script link
@@ -33,12 +59,12 @@ https://cdn.jsdelivr.net/gh/Bhpsngum/utilitiesNstuffs@master/newStringReplacer/J
 And you're done! :D
 ## Structure for one utility/stuff explanation
 
-* **Language:** Language(s) the code is running or supporting (usually JS :D )
+* **Languages:** Language(s) the code is running or supporting (usually JS :D )
 * **Requirements:** Some requirements when running those scripts (with the default one is the latest language version), these are maybe libraries, GPU cards, etc.
 * **Syntax:** Syntax for that utility/stuff
 * **Return value:** The value returned after executing that utility/stuff
 
-There will be an example for easier understanding
+* **Examples:** There will be an example here for easier understanding
 
 * **Uses:** In which part that utility/stuff is used
 * **Sensitive functions:** Some functions that you shouldn't modify so that the code can run properly (most of them are built-in functions)
@@ -46,9 +72,9 @@ There will be an example for easier understanding
 **Note:** if you're ensure that your project/codes won't mess up any built-in functions, you can use the utilized version below this part
 
 Got it? Now let's go! :D
-## [getProperVariableName.js](/getProperVariableName/JS/getProperVariableName.js):
+## [getProperVariableName.js](/getProperVariableName/JS/getProperVariableName.js)
 
-### Language 
+### Languages
 JavaScript (ECMAScript)
 
 ### Requirements 
@@ -60,7 +86,7 @@ None
 ### Return value
 a string that can be set as JS Variable from your input string 
 
-For example: 
+### Examples
 ```js
 > "It's my funny variable name".getProperJSVariableName()
 "It_s_my_funny_variable_name"
@@ -96,9 +122,9 @@ eval
 Object.defineProperties
 ```
 if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/getProperVariableName/JS/getProperVariableName.util.js).
-## [newStringReplacer.js](/newStringReplacer/JS/newStringReplacer.js):
+## [newStringReplacer.js](/newStringReplacer/JS/newStringReplacer.js)
 Provide a new powerful function for string replacement while keeping the old `string.replace` function for Regular Expression (RegExp)
-### Language
+### Languages
 JavaScript (ECMAScript)
 
 ### Requirements
@@ -128,7 +154,7 @@ None
 ### Return value
 a replaced string
 
-For example: 
+### Examples
 ```js
 > "12121212".replace("12","here")
 "here121212"
