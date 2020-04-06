@@ -32,7 +32,7 @@ String.prototype.replace= function(params)
     else
     {
         let finder=(args[0]||"undefined").toString(),flags={},replaceparam=args[2],str=this.toString(),existflags="igmsbe";
-        for (let flag of existflags) flags[flag]=args[1].toString().includes(flag);
+        for (let flag of existflags) flags[flag]=(args[1]||"").toString().includes(flag);
         let m=[str],special=(flags.m && flags.g) || flags.b || flags.e;
         if (flags.m && flags.g)
         {
