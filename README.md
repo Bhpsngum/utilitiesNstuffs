@@ -46,8 +46,7 @@ There will be an example for easier understanding
 **Note:** if you're ensure that your project/codes don't mess any built-in functions, you can see the utilized version below this part
 
 Got it? Now let's go! :D
-## [getProperVariableName.js](/getProperVariableName/JS/getProperJSVariableName.js):
-Script link (use in html files): https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master/getProperJSVariableName.min.js
+## [getProperVariableName.js](/getProperVariableName/JS/getProperVariableName.js):
 
 * **Language:** JavaScript (ECMAScript)
 
