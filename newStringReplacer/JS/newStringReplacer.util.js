@@ -66,7 +66,6 @@ String.prototype.replace= function(params)
                     newstr.oldReplace(finder,function(v,i){exist=1;index=i;});
                     if (exist)
                     {
-                        debugger;
                         let parsed=(typeof replaceparam == "function")?replaceparam(result,index).toString():replaceparam.toString();
                         splitstr+=newstr.slice(0,index)+parsed;
                         newstr=newstr.slice(index+finder.length,newstr.length);
