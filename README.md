@@ -23,12 +23,12 @@ For example:
 /properVariableName/JS/getProperJSVariableName.min.js
 /newStringReplacer/JS/newStringReplacer.util.min.js
 ```
-* **Step 2:** Append with `https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master` to create an URL
+* **Step 2:** Append with `https://cdn.jsdelivr.net/gh/Bhpsngum/utilitiesNstuffs@master` to create an URL
 
 Combined with the examples above, we will have these URLs:
 ```
-https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master/properVariableName/JS/getProperJSVariableName.min.js
-https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master/newStringReplacer/JS/newStringReplacer.util.min.js
+https://cdn.jsdelivr.net/gh/Bhpsngum/utilitiesNstuffs@master/properVariableName/JS/getProperJSVariableName.min.js
+https://cdn.jsdelivr.net/gh/Bhpsngum/utilitiesNstuffs@master/newStringReplacer/JS/newStringReplacer.util.min.js
 ```
 And you're done! :D
 ## Structure for one utility/stuff explanation
