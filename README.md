@@ -43,7 +43,7 @@ There will be an example for easier understanding
 * **Uses:** In which part that utility/stuff is used
 * **Sensitive functions:** Some functions that you shouldn't modify so that the code can run properly (most of them are built-in functions)
 
-**Note:** if you're ensure that your project/codes don't mess any built-in functions, you can see the utilized version below this part
+**Note:** if you're ensure that your project/codes won't mess up any built-in functions, you can see the utilized version below this part
 
 Got it? Now let's go! :D
 ## [getProperVariableName.js](/getProperVariableName/JS/getProperVariableName.js):
@@ -85,3 +85,9 @@ var The_'Little'_Hamster_969 = '{/*even more thing*/}';
 ```
 which will return the `Unexpected identifier Error` when it came to Modding. So that how the code works: just edit the variable to a proper JS variable name :D
 * **Sensitive functions**
+```js
+Error.prototype
+eval
+Object.defineProperty
+```
+if you're ensure that your project/codes won't mess up any built-in functions, see the utilised version [here](/getProperVariableName/JS/getProperVariableName.util.js)
