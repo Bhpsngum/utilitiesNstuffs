@@ -97,7 +97,7 @@ Object.defineProperties
 ```
 if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/getProperVariableName/JS/getProperVariableName.util.js).
 ## [newStringReplacer.js](/newStringReplacer/JS/newStringReplacer.js):
-
+Provide a new powerful function for string replacement while keeping the old `string.replace` function for Regular Expression (RegExp)
 ### Language
 JavaScript (ECMAScript)
 
@@ -105,6 +105,21 @@ JavaScript (ECMAScript)
 None
 
 ### Syntax
+`string.replace(RegExp,replaceparam)` (casual funtion)
+`string.replace(FinderString,flags,replaceparam)` (replace with non-RegExp finder) where:
+* **`FinderString`**: String (or non-RegExp) that need to be replaced
+* **`flags`**: flags for replacement preferences (must be a String)
+
+  Available flags:
+  * `g` : Global flag - finds every occurence of the word in a string
+  * `b` : Beginning - match only at the beggining of the string
+  * `e` : Ending - match only at the end of the string
+  * `m` : Multiline (available for `b` and `e` flags) - treated one line as a main string
+  * `i` : Case-insensitive - matched every results regardless of Lowercase or Uppercase form
+  
+   **Notes:**
+    * A combination of both `b` and `e` flags can be called as the "Full String comparison" (except when `m` flag is enabled)
+    * `b` and `e` flags can be used for new line if `m` flag is enabled.
 
 ### Return value
 a replaced string
