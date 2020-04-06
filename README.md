@@ -2,32 +2,54 @@
 Some funny codes that will be helpful in some specific cases
 
 Some of them are derived from my own extension and mod code, also from other sources if they're interesting
-
-**Table of contents:**
-
-  **[Where I can test them?](#where-i-can-test-them)**
+<details>
+  <summary markdown="span">Table of contents</summary>
   
+  **[Where I can test them?](#where-i-can-test-them)**
+
   **[How to get script link](#how-to-get-script-link)**
   
   **[Structure for one utility/stuff explanation](#structure-for-one-utilitystuff-explanation)**
   
   **[getProperVariableName.js](#getpropervariablenamejs)**
   
-  * **[Languages](#languages)**
-  * **[Requirements](#requirements)**
-  * **[Syntax](#syntax)**
-  * **[Return value](#return-value)**
-  * **[Examples](#examples)**
-  * **[Sensitive functions](#sensitive-functions)**
+  <details>
+    <summary markdown="span">Contents</summary>
+ 
+   * **[Languages](#languages)**
+    
+   * **[Requirements](#requirements)**
+   
+   * **[Syntax](#syntax)**
+   
+   * **[Return value](#return-value)**
+   
+   * **[Examples](#examples)**
+   
+   * **[Sensitive functions](#sensitive-functions)**
+   
+  </details>
   
   **[newStringReplacer.js](#newstringreplacerjs)**
   
-  * **[Languages](#languages-1)**
-  * **[Requirements](#requirements-1)**
-  * **[Syntax](#syntax-1)**
-  * **[Return value](#return-value-1)**
-  * **[Examples](#examples-1)**
-  * **[Sensitive functions](#sensitive-functions-1)**
+  <details>
+    <summary markdown="span">Contents</summary>
+ 
+   * **[Languages](#languages-1)**
+    
+   * **[Requirements](#requirements-1)**
+   
+   * **[Syntax](#syntax-1)**
+   
+   * **[Return value](#return-value-1)**
+   
+   * **[Examples](#examples-1)**
+   
+   * **[Sensitive functions](#sensitive-functions-1)**
+   
+  </details>
+</details>
+
 ## Where I can test them?
 For convenience, i've put all of these scripts to https://bhpsngum.github.io, you can visit this page to test them :D
 ## How to get script link
