@@ -162,11 +162,11 @@ None
   This parameter can be omitted
 
   Available flags:
-  * `g` : Global flag - finds every occurence of the word in a string
-  * `b` : Beginning - match only at the beggining of the string
-  * `e` : Ending - match only at the end of the string
-  * `m` : Multiline (available for `b` and `e` flags) - treated one line as a main string
-  * `i` : Case-insensitive - matched every results regardless of Lowercase or Uppercase form
+  * `g` : Global - finds every occurence of the search parameter in a string
+  * `b` : Beginning - matches only at the beggining of the string
+  * `e` : Ending - matches only at the end of the string
+  * `m` : Multiline (available for `b` and `e` flags) - treats one line as a main string
+  * `i` : case-Insensitive - matches every results regardless of Lowercase or Uppercase form
   
    **Notes:**
     * A combination of both `b` and `e` flags can be called as the "Full String replacement" (except when `m` flag is enabled)
