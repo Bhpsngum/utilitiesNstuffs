@@ -4,7 +4,7 @@ Some funny codes that will be helpful in some specific cases
 Some of them are derived from my own extension and mod code, also from other sources if they're interesting
 ## Where I can test them?
 For convenience, i've put all of these script to https://bhpsngum.github.io, you can visit this page to test them :D
-## [getProperJSVariableName.js](getProperJSVariableName.js):
+## [getProperJSVariableName.js](/getProperVariableName/JS/getProperJSVariableName.js):
 Script link (use in html files): https://cdn.jsdelivr.net/gh/Bhpsngum/UltitiesNstuffs@master/getProperJSVariableName.min.js
 
 Language: JavaScript (ECMAScript)
