@@ -28,21 +28,11 @@ String.prototype.replace= function(params)
                 return s;
     }
     let args=arguments;
-    if ((args[0]||/test/g).test) return this.oldReplace(args[0],args[1]);
+    if (args.length<3) return this.oldReplace(args[0],args[1]);
     else
     {
-        let finder=args[0].toString(),flags={},replaceparam,str=this.toString(),existflags="igmsbe";
-        switch(args.length)
-        {
-            case 1:
-                return str.oldReplace(args[0]);
-            case 2:
-                replaceparam=args[1];
-                break;
-            default:
-                for (let flag of existflags) flags[flag]=args[1].toString().includes(flag);
-                replaceparam=args[2];
-        }
+        let finder=(args[0]||"undefined").toString(),flags={},replaceparam=args[2],str=this.toString(),existflags="igmsbe";
+        for (let flag of existflags) flags[flag]=(args[1]||"").toString().includes(flag);
         let m=[str],special=(flags.m && flags.g) || flags.b || flags.e;
         if (flags.m && flags.g)
         {
