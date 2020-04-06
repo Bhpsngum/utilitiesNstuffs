@@ -117,6 +117,7 @@ for some cases that String replacement is more useful than Regular Expression re
 ```js
 String.prototype.replace (before script execution)
 *.prototype.toString
+String.prototype.toUpperCase
 String.prototype.oldReplace (after script execution)
 ```
 if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/newStringReplacer/JS/newStringReplacer.util.js).
