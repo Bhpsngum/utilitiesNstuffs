@@ -62,11 +62,11 @@ String.prototype.replace= function(params)
                 while (exist)
                 {
                     exist=0;
-                    let index;
-                    newstr.oldReplace(finder,function(v,i){exist=1;index=i;});
+                    let index,result;
+                    newstr.oldReplace(finder,function(v,i){exist=1;result=v;index=i;});
                     if (exist)
                     {
-                        let parsed=(typeof replaceparam == "function")?replaceparam(result,index).toString():replaceparam.toString();
+                        let parsed=(typeof replaceparam == "function")?(replaceparam(result,index)||"undefined").toString():replaceparam.toString();
                         splitstr+=newstr.slice(0,index)+parsed;
                         newstr=newstr.slice(index+finder.length,newstr.length);
                     }
