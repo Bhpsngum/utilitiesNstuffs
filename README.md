@@ -3,7 +3,7 @@ Some funny codes that will be helpful in some specific cases
 
 Some of them are derived from my own extension and mod code, also from other sources if they're interesting
 
-Table of contents:
+**Table of contents:**
 
   **[Where I can test them?](#where-i-can-test-them)**
   
@@ -16,7 +16,7 @@ Table of contents:
   * **[Languages](#languages)**
   * **[Requirements](#requirements)**
   * **[Syntax](#syntax)**
-  * **[Return values](#return-values)**
+  * **[Return value](#return-value)**
   * **[Examples](#examples)**
   * **[Sensitive functions](#sensitive-functions)**
   
@@ -25,7 +25,7 @@ Table of contents:
   * **[Languages](#languages-1)**
   * **[Requirements](#requirements-1)**
   * **[Syntax](#syntax-1)**
-  * **[Return values](#return-values-1)**
+  * **[Return value](#return-value-1)**
   * **[Examples](#examples-1)**
   * **[Sensitive functions](#sensitive-functions-1)**
 ## Where I can test them?
