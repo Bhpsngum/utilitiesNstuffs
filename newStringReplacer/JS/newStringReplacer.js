@@ -7,6 +7,12 @@ String.prototype.replace= function(params)
         for (let i=0;i<n;i++) index+=array[i].length;
         return index;
     }
+    function slice(str,firstIndex,lastIndex)
+    {
+        let st="";
+        for (let i=firstIndex;i<lastIndex;i++) st+=str[i];
+        return st;
+    }
     function caseinsensitivecompare(st1,st2,n)
     {
         return (n)?(st1.toUpperCase()==st2.toUpperCase()):(st1==st2);
@@ -16,11 +22,11 @@ String.prototype.replace= function(params)
         let d=0,s=st;
                 for (let i=startIndex;i<=st.length-finder.length;i++)
                 {
-                    let result=st.slice(i,i+finder.length);
+                    let result=slice(st,i,i+finder.length);
                     if (caseinsensitivecompare(result,finder,isCaseinSensitive))
                     {
                         let parsed=(typeof replaceparam === "function")?(replaceparam(result,i+addIndex)||"undefined").toString():replaceparam.toString();
-                        s=s.slice(0,i+d)+parsed+s.slice(i+d+finder.length,s.length);
+                        s=slice(s,0,i+d)+parsed+slice(s,i+d+finder.length,s.length);
                         d+=parsed.length-finder.length;
                     }
                     if (!isGlobal) break;
@@ -42,7 +48,7 @@ String.prototype.replace= function(params)
             {
                 if (str[i]=="\n" || str[i]=="\r" || i==str.length)
                 {
-                    m[m.length]=str.slice(preIndex+1,i);
+                    m[m.length]=slice(str,preIndex+1,i);
                     m[m.length]=str[i]||"";
                     preIndex=i;
                 }
@@ -62,10 +68,10 @@ String.prototype.replace= function(params)
                 else
                 {
                     let result;
-                    if (flags.b) result=st.slice(0,finder.length);
+                    if (flags.b) result=slice(st,0,finder.length);
                     else
                     {
-                        result=st.slice(-finder.length);
+                        result=slice(st,st.length-finder.length,st.length);
                         start=st.length-finder.length;
                         if (start<0) start=0;
                     }
