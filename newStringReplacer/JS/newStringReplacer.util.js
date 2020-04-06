@@ -31,9 +31,9 @@ String.prototype.replace= function(params)
     if (args.length<3) return this.oldReplace(args[0],args[1]);
     else
     {
-        let finder=(args[0]||"undefined").toString(),flags={},replaceparam=args[2],str=this.toString(),existflags="igmsbe";
+        let finder=(args[0]||"undefined").toString(),flags={},replaceparam=args[2],str=this.toString(),existflags="igmsbe",m=[str];
         for (let flag of existflags) flags[flag]=(args[1]||"").toString().includes(flag);
-        let m=[str],special=(flags.m && flags.g) || flags.b || flags.e;
+        let special=(flags.m && flags.g) || flags.b || flags.e;
         if (flags.m && flags.g)
         {
             let preIndex=-1;
