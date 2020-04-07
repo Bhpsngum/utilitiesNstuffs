@@ -7,6 +7,18 @@ String.prototype.replace= function(params)
         for (let i=0;i<n;i++) index+=array[i].length;
         return index;
     }
+    function toString(param)
+    {
+        switch(param)
+        {
+            case void 0:
+                return "undefined";
+            case null:
+                return "null";
+            default:
+                return param.toString();
+        }
+    }
     function caseinsensitivecompare(st1,st2,n)
     {
         return (n)?(st1.toUpperCase()==st2.toUpperCase()):(st1==st2);
@@ -19,7 +31,7 @@ String.prototype.replace= function(params)
                     let result=st.slice(i,i+finder.length);
                     if (caseinsensitivecompare(result,finder,isCaseinSensitive))
                     {
-                        let parsed=(typeof replaceparam === "function")?(replaceparam(result,i+addIndex)||"undefined").toString():replaceparam.toString();
+                        let parsed=(typeof replaceparam === "function")?toString(replaceparam(result,i+addIndex)):toString(replaceparam);
                         s=s.slice(0,i+d)+parsed+s.slice(i+d+finder.length,s.length);
                         d+=parsed.length-finder.length;
                     }
@@ -31,8 +43,8 @@ String.prototype.replace= function(params)
     if (args.length<3) return this.oldReplace(args[0],args[1]);
     else
     {
-        let finder=(args[0]||"undefined").toString(),flags={},replaceparam=args[2],str=this.toString(),existflags="igmsbe",m=[str];
-        for (let flag of existflags) flags[flag]=(args[1]||"").toString().includes(flag);
+        let finder=toString(args[0]),flags={},replaceparam=args[2],str=this,existflags="igmsbe",m=[str];
+        for (let flag of existflags) flags[flag]=toString(args[1]).includes(flag);
         let special=(flags.m && flags.g) || flags.b || flags.e;
         if (flags.m && flags.g)
         {
