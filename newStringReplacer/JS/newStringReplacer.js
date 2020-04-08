@@ -59,7 +59,7 @@ String.prototype.replace= function(params)
     {
         let finder=toString(args[0]),flags={},replaceparam=args[2],str=this,m=[str];
         for (let flag of toString(args[1])) flags[flag]=true;
-        let special=(flags.m && flags.g) || flags.b || flags.e;
+        let special=flags.b || flags.e;
         if (flags.m && flags.g)
         {
             let preIndex=-1;
