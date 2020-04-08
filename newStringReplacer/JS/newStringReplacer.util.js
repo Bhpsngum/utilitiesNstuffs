@@ -39,8 +39,16 @@ String.prototype.replace= function(params)
                 }
                 return s;
     }
-    let args=arguments;
-    if (args.length<3) return this.oldReplace(args[0],args[1]);
+    let args=arguments,u;
+    try
+    {
+        u=toString(new RegExp(args[0]));
+    }
+    catch(e)
+    {
+        u="";
+    }
+    if (args.length<3 || (u==toString(args[0]))) return this.oldReplace(args[0],args[1]);
     else
     {
         let finder=toString(args[0]),flags={},replaceparam=args[2],str=this,existflags="igmsbe",m=[str];
