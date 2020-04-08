@@ -48,7 +48,7 @@ String.prototype.replace= function(params)
     let args=arguments,u;
     try
     {
-        u=new RegExp(args[0]).toString();
+        u=toString(new RegExp(args[0]));
     }
     catch(e)
     {
