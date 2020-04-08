@@ -80,7 +80,7 @@ https://cdn.jsdelivr.net/gh/Bhpsngum/utilitiesNstuffs@master/newStringReplacer/J
 ```
 And you're done! :D
 
-**Another note:** Minified version is not up-to-date very often due to jsDelivir's latency (1-3 days for update), use the main or utilised version instead.
+**Another note:** Minified version is not up-to-date very often due to jsDelivr's latency (1-3 days for update), use the main or utilised version instead.
 ## Structure for one utility/stuff explanation
 
 * **Languages:** Language(s) the code is running or supporting (usually JS :D )
