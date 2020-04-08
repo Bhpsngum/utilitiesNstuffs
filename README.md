@@ -79,6 +79,8 @@ https://cdn.jsdelivr.net/gh/Bhpsngum/utilitiesNstuffs@master/getProperVariableNa
 https://cdn.jsdelivr.net/gh/Bhpsngum/utilitiesNstuffs@master/newStringReplacer/JS/newStringReplacer.util.min.js
 ```
 And you're done! :D
+
+**Another note:** Minified version is not up-to-date very often due to jsDelivir's latency (1-3 days for update), use the main or utilised version instead.
 ## Structure for one utility/stuff explanation
 
 * **Languages:** Language(s) the code is running or supporting (usually JS :D )
@@ -215,6 +217,7 @@ for some cases that String replacement is more useful than Regular Expression re
 String.prototype.replace (before script execution)
 *.prototype.toString
 String.prototype.toUpperCase
+RegExp.prototype
 String.prototype.oldReplace (after script execution)
 ```
 if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/newStringReplacer/JS/newStringReplacer.util.js).
