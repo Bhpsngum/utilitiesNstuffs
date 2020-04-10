@@ -204,7 +204,7 @@ test"
 ```
 or if you prefer using old replace function, use `string.oldReplace`
 ```js
-> "121212".replace("12","alpha")
+> "121212".oldReplace("12","alpha")
 "alpha1212"
 ```
 and if you don't make sure that the script is loaded or not, use the method below:
