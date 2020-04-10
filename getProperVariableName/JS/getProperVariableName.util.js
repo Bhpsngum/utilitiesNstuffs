@@ -1,4 +1,4 @@
-String.prototype.getProperJSVariableName=function(mode)
+String.prototype.getProperJSVariableName=function()
 {
   let declare=["var","let"];
   CustomError = function(name,message)
@@ -9,7 +9,7 @@ String.prototype.getProperJSVariableName=function(mode)
   }
   let inp=(this=="")?"_":(this.replace(/^(\d)/g,"_$1").replace(/(=|\n|\r|\s|;|,)/g,"_"));
   let s;
-  switch (mode||"")
+  switch (arguments[0]||"")
   {
     case "":
       s="";
