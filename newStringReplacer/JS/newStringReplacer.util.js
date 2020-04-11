@@ -96,6 +96,6 @@ String.prototype.replace= function()
             if (!special) mm[i]=replace(st,finder,replaceparam,flags.g,flags.i,getIndex(m,i),0);
             if (!flags.g) break;
         }
-        return mm.join();
+        return mm.join("");
     }
 }
