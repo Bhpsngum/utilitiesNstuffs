@@ -13,7 +13,7 @@ String.prototype.getProperJSVariableName=function()
     for (let i=firstIndex;i<lastIndex;i++) st+=str[i];
     return st;
   }
-  let inp=(this=="")?"_":this;
+  let inp=(this=="")?"_":this+"";
   switch(inp[0])
   {
     case "0":
