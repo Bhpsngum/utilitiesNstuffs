@@ -99,7 +99,7 @@ And you're done! :D
 **Note:** if you're ensure that your project/codes won't mess up any built-in functions, you can use the utilized version below this part
 
 Got it? Now let's go! :D
-## [getProperVariableName.js](/getProperVariableName/JS/getProperVariableName.js)
+## [getProperVariableName(JS Only)](https://bhpsngum.github.io/util/getProperJSVariableName/)
 
 ### Languages
 JavaScript (ECMAScript)
