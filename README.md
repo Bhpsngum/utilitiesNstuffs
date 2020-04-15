@@ -14,7 +14,7 @@ Feel free to contribute your idea by creating pull requests or open new issues, 
   
   **[Structure for one utility/stuff explanation](#structure-for-one-utilitystuff-explanation)**
   
-  **[getProperVariableName.js](#getpropervariablenamejs)**
+  **[getProperVariableName.js](#getpropervariablename-js-only)**
   
   <details>
     <summary markdown="span">Contents</summary>
@@ -99,7 +99,7 @@ And you're done! :D
 **Note:** if you're ensure that your project/codes won't mess up any built-in functions, you can use the utilized version below this part
 
 Got it? Now let's go! :D
-## [getProperVariableName(JS Only)](https://bhpsngum.github.io/util/getProperJSVariableName/)
+## [getProperVariableName (JS Only)](https://bhpsngum.github.io/util/getProperJSVariableName/)
 
 ### Languages
 JavaScript (ECMAScript)
