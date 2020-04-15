@@ -13,6 +13,10 @@ String.prototype.getProperJSVariableName=function()
     for (let i=firstIndex;i<lastIndex;i++) st+=str[i];
     return st;
   }
+  function check(s,l,str)
+  {
+    eval(s+"function test(){"+l+" "+str+"}");
+  }
   let inp=(this=="")?"_":this+"";
   switch(inp[0])
   {
@@ -57,14 +61,14 @@ String.prototype.getProperJSVariableName=function()
   }
   try
   {
-    for (let i of declare) eval(s+i+" "+inp);
+    for (let i of declare) check(s,i,inp);
   }
   catch(e)
   {
     let err=0;
     try
     {
-      for (let i of declare) eval(s+i+" _"+inp);
+      for (let i of declare) check(s,i,"_"+inp);
     }
     catch(er)
     {
@@ -74,7 +78,7 @@ String.prototype.getProperJSVariableName=function()
         let reserved=0,illegalchar=0,errors=0;
         try
         {
-          for (let index of declare) eval(s+index+" "+inp.slice(0,i+1));
+          for (let index of declare) check(s,index,inp.slice(0,i+1));
         }
         catch(errr)
         {
@@ -84,7 +88,7 @@ String.prototype.getProperJSVariableName=function()
         }
         try
         {
-          for (let index of declare) eval(s+index+" "+inp[i]);
+          for (let index of declare) check(s,index,inp[i]);
         }
         catch(error)
         {
