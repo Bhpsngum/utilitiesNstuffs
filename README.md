@@ -14,7 +14,7 @@ Feel free to contribute your idea by creating pull requests or open new issues, 
   
   **[Structure for one utility/stuff explanation](#structure-for-one-utilitystuff-explanation)**
   
-  **[Contribution](#contribution)
+  **[Contribution](#contribution)**
   
   **[getProperVariableName (JS Only)](#getpropervariablename-js-only)**
   
