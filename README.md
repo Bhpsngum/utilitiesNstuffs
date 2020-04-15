@@ -14,7 +14,7 @@ Feel free to contribute your idea by creating pull requests or open new issues, 
   
   **[Structure for one utility/stuff explanation](#structure-for-one-utilitystuff-explanation)**
   
-  **[getProperVariableName.js](#getpropervariablename-js-only)**
+  **[getProperVariableName (JS Only)](#getpropervariablename-js-only)**
   
   <details>
     <summary markdown="span">Contents</summary>
