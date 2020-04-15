@@ -101,9 +101,9 @@ And you're done! :D
 **Note:** if you're ensure that your project/codes won't mess up any built-in functions, you can use the utilized version below this part
 ## Contribution
 
-You can report the bug or issues of those function below in [issues](/issues)
+You can report the bug or issues of those function below in [issues](https://github.com/Bhpsngum/utilitiesNstuffs/issues)
 
-or if you can fix it, you can [fork this repository](/fork) the create [pull requests](/pulls)
+or if you can fix it, you can [fork this repository](https://github.com/Bhpsngum/utilitiesNstuffs/fork) the create [pull requests](https://github.com/Bhpsngum/utilitiesNstuffs/pulls)
 
 If you do well, your pull requests will be accepted and you'll be one of the contributors!
 
