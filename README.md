@@ -14,6 +14,8 @@ Feel free to contribute your idea by creating pull requests or open new issues, 
   
   **[Structure for one utility/stuff explanation](#structure-for-one-utilitystuff-explanation)**
   
+  **[Contribution](#contribution)
+  
   **[getProperVariableName (JS Only)](#getpropervariablename-js-only)**
   
   <details>
@@ -97,6 +99,13 @@ And you're done! :D
 * **Sensitive functions:** Some functions that you shouldn't modify so that the code can run properly (most of them are built-in functions)
 
 **Note:** if you're ensure that your project/codes won't mess up any built-in functions, you can use the utilized version below this part
+## Contribution
+
+You can report the bug or issues of those function below in [issues](/issues)
+
+or if you can fix it, you can [fork this repository](/fork) the create [pull requests](/pulls)
+
+If you do well, your pull requests will be accepted and you'll be one of the contributors!
 
 Got it? Now let's go! :D
 ## [getProperVariableName (JS Only)](https://bhpsngum.github.io/util/getProperJSVariableName/)
