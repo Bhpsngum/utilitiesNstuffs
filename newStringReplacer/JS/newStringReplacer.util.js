@@ -1,5 +1,5 @@
 String.prototype.oldReplace=String.prototype.replace;
-String.prototype.replace= function()
+String.prototype.replace = function replace()
 {
     function getIndex(array,n)
     {
