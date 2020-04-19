@@ -1,4 +1,4 @@
-String.prototype.getProperJSVariableName=function()
+String.prototype.getProperJSVariableName = function getProperJSVariableName()
 {
   let declare=["var","let"];
   CustomError = function(name,message)
