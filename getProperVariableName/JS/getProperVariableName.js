@@ -102,7 +102,7 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
     }
     if (err==0) inp="_"+inp;
   }
-  if (!function(inp){
+  if (function(){
     if (inp == "NaN") return true;
     var temp=window[inp];
     window[inp]=window[inp]+1;
