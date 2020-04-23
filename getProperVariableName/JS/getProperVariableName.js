@@ -109,7 +109,7 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
     var check=temp==window[inp];
     window[inp]=temp;
     return check;
-  }()) console.warn(`'${inp}' is deprecated. This problem occurs because '${inp}' is defined as a global variable or the properties of them, therefore it's set to read-only. Setting them won’t have an effect. Avoid using this input as a variable name.`);
+  }()) console.warn(`'${inp}' is initially defined as a global variable or the properties of them, therefore it's immutable or read-only. Setting them won’t have an effect. Avoid using this input as a variable name.`);
   return inp;
 };
 Object.defineProperties(String.prototype, {
