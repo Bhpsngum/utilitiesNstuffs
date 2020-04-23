@@ -47,8 +47,8 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
         break;
     }
   }
-  let s;
-  switch (arguments[0]||"")
+  let s,mode=arguments[0]||"";
+  switch (mode)
   {
     case "":
       s="";
