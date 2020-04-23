@@ -85,14 +85,3 @@ Object.defineProperties(String.prototype, {
     get() {return this.getProperJSVariableName("strict");}
   }
 });
-
-  return inp;
-};
-Object.defineProperties(String.prototype, {
-  properJSVariableName: {
-    get() {return this.getProperJSVariableName();}
-  },
-  properStrictJSVariableName: {
-    get() {return this.getProperJSVariableName("strict");}
-  }
-});
