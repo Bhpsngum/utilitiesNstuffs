@@ -12,8 +12,8 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
     eval(s+"function test(){"+l+" "+str+"}");
   }
   let inp=(this=="")?"_":(this.replace(/^(\d)/g,"_$1").replace(/(=|\n|\r|\s|;|,)/g,"_"));
-  let s;
-  switch (arguments[0]||"")
+  let s,mode=arguments[0]||"";
+  switch (mode)
   {
     case "":
       s="";
