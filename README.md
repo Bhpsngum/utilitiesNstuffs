@@ -155,6 +155,7 @@ which will return the `Unexpected identifier Error` when it came to Modding. So 
 ```js
 Error.prototype
 eval
+console.warn
 Object.defineProperties
 ```
 if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/getProperVariableName/JS/getProperVariableName.util.js).
