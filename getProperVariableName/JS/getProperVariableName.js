@@ -102,21 +102,18 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
     }
     if (err==0) inp="_"+inp;
   }
-  if (function(){
-    if (inp == "NaN") return true;
-    var temp=window[inp];
-    window[inp]=window[inp]+1;
-    var check=temp==window[inp];
-    window[inp]=temp;
-    return check;
-  }()) console.warn(`'${inp}' is initially defined as a global variable or the properties of them, therefore it's immutable or read-only. Setting them won’t have an effect. Avoid using this input as a variable name.`);
-  return inp;
+  var temp=window[inp];
+  window[inp]=window[inp]+1;
+  let opt={name:inp,warning:temp == window[inp]||inp == "NaN",error:this+""!=inp};
+  if (opt.warning) console.warn(`'${inp}' is initially defined as a global variable or the properties of them, therefore it's immutable or read-only. Setting them won’t have an effect. Avoid using this input as a variable name.`);
+  window[inp]=temp;
+  return opt;
 };
 Object.defineProperties(String.prototype, {
   properJSVariableName: {
-    get() {return this.getProperJSVariableName();}
+    get() {return this.getProperJSVariableName().name;}
   },
   properStrictJSVariableName: {
-    get() {return this.getProperJSVariableName("strict");}
+    get() {return this.getProperJSVariableName("strict").name;}
   }
 });
