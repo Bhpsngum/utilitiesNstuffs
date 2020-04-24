@@ -1,4 +1,5 @@
 {
   "name":"utilitiesNstuffs",
+  "version":"1.0",
   "publishConfig": { "registry": "https://npm.pkg.github.com/" }
 }
