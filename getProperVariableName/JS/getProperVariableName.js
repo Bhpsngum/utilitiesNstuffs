@@ -104,11 +104,11 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
   }
   var temp=window[inp];
   window[inp]=window[inp]+1;
-  let opt={name:inp,immutable:temp == window[inp]||inp == "NaN",improper:this+""!=inp};
-  if (opt.immutable) 
+  let opt={name:inp,mutable:!(temp == window[inp]||inp == "NaN"),proper:this+""==inp};
+  if (!opt.mutable) 
   {
     if (!arguments[1]) console.warn(`'${inp}' is initially defined as a global variable or the properties of them, therefore it's immutable or read-only. Setting them won’t have an effect. Avoid using this input as a variable name.`);
-    else return "_"+opt.name;
+    else opt.name = "_"+opt.name;
   }
   window[inp]=temp;
   return opt;
