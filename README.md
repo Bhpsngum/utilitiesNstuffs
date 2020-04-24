@@ -119,14 +119,14 @@ None
 ### Syntax
 ```string.getProperJSVariableName(mode,strictImmutable)``` where:
 * **`mode`** : specify JavaScript mode, "strict" or omitted
-* **`strictImmutable`**: in case of your input string is a immutable variable (global objects or properties of them), Your string will be converted to non-immutable variable name. `true`, `false` or ommited. Set to true to create non-immutable variable
+* **`strictImmutable`**: in case of your input string is a immutable variable (global objects or properties of them), Your string will be converted to mutable variable name. `true`, `false` or ommited. Set to true to create mutable variable
 
-  **Notes:** you can also use falsy values instead of ommitted the parameter (`null`,`undefined`,`0`,etc.)
+  **Notes:** you can also use falsy values instead of ommit the parameter (`null`,`undefined`,`0`,etc.)
 
 ### Return value
 An object with 3 properties:
 * **`name`** (String) : a string that can be set as JS Variable from your input string 
-* **`immutable`** (Boolean): Indicates if the input variable name is immutable or not.
+* **`mutable`** (Boolean): Indicates if the input variable name is mutable or not.
 
   In addition, a warning will be displayed in a console for more information
 * **`proper`** (Boolean) : Indicates if the input is a proper JavaScript variable name or not.
@@ -137,19 +137,19 @@ An object with 3 properties:
 "It_s_my_funny_variable_name"
 
 > "69 likes!".getProperJSVariableName()
-{name: "_69_likes_", proper: false, immutable: false}
+{name: "_69_likes_", proper: false, mutable: true}
 
 > "static".getProperJSVariableName()
-{name: "static", proper: true, immutable: false}
+{name: "static", proper: true, mutable: true}
 
 > "static".getProperJSVariableName("strict")
-{name: "_static", proper: false, immutable: false}
+{name: "_static", proper: false, mutable: true}
 
 > "window".getProperJSVariableName()
-{name: "window", proper: true, immutable: true}
+{name: "window", proper: true, mutable: false}
 
 > "window".getProperJSVariableName("strict",true);
-{name: "_window", proper: true, immutable: false}
+{name: "_window", proper: true, mutable: true}
 ```
 or if you want to call it as a property, you can use `myString.properJSVariableName` or `myString.properStrictJSVariableName` instead:
 ```js
