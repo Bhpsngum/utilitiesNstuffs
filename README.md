@@ -117,21 +117,39 @@ JavaScript (ECMAScript)
 None
 
 ### Syntax
-```string.getProperJSVariableName(mode)``` where `mode` is "strict" or omitted
+```string.getProperJSVariableName(mode,strictImmutable)``` where:
+* **`mode`** : specify JavaScript mode, "strict" or omitted
+* **`strictImmutable`**: in case of your input string is a immutable variable (global objects or properties of them), Your string will be converted to non-immutable variable name. `true`, `false` or ommited. Set to true to create non-immutable variable
+
+  **Notes:** you can also use falsy values instead of ommitted the parameter (`null`,`undefined`,`0`,etc.)
 
 ### Return value
-a string that can be set as JS Variable from your input string 
+An object with 3 properties:
+* **`name`** (String) : a string that can be set as JS Variable from your input string 
+* **`immutable`** (Boolean): Indicates if the input variable name is immutable or not.
+
+  In addition, a warning will be displayed in a console for more information
+* **`proper`** (Boolean) : Indicates if the input is a proper JavaScript variable name or not.
 
 ### Examples
 ```js
-> "It's my funny variable name".getProperJSVariableName()
+> "It's my funny variable name".getProperJSVariableName().name
 "It_s_my_funny_variable_name"
+
 > "69 likes!".getProperJSVariableName()
-"_69_likes_"
+{name: "_69_likes_", proper: false, immutable: false}
+
 > "static".getProperJSVariableName()
-"static"
+{name: "static", proper: true, immutable: false}
+
 > "static".getProperJSVariableName("strict")
-"_static"
+{name: "_static", proper: false, immutable: false}
+
+> "window".getProperJSVariableName()
+{name: "window", proper: true, immutable: true}
+
+> "window".getProperJSVariableName("strict",true);
+{name: "_window", proper: true, immutable: false}
 ```
 or if you want to call it as a property, you can use `myString.properJSVariableName` or `myString.properStrictJSVariableName` instead:
 ```js
