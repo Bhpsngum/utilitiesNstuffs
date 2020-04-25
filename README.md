@@ -111,7 +111,7 @@ Got it? Now let's go! :D
 ## [getProperVariableName (JS Only)](https://bhpsngum.github.io/util/getProperJSVariableName/)
 
 ### Languages
-JavaScript (ECMAScript)
+[JavaScript (ECMAScript)](/getProperVariableName/JS/getProperVariableName.js)
 
 ### Requirements 
 None
@@ -180,7 +180,7 @@ if you're ensure that your project/codes won't mess up any built-in functions, u
 ## [newStringReplacer.js](/newStringReplacer/JS/newStringReplacer.js)
 Provide a new powerful function for string replacement while keeping the old `string.replace` function for Regular Expression (RegExp)
 ### Languages
-JavaScript (ECMAScript)
+[JavaScript (ECMAScript)](/newStringReplacer/JS/newStringReplacer.js)
 
 ### Requirements
 None
