@@ -119,9 +119,9 @@ None
 ### Syntax
 ```string.getProperJSVariableName(mode,strictImmutable)``` where:
 * **`mode`** : specify JavaScript mode, "strict" or omitted
-* **`strictImmutable`**: in case of your input string is a immutable variable (global objects or properties of them), Your string will be converted to mutable variable name. `true`, `false` or ommited. Set to true to create mutable variable
+* **`strictImmutable`**: in case of your input string is a immutable variable (global objects or properties of them), Your string will be converted to mutable variable name. `true`, `false` or omited. Set to true to create mutable variable
 
-  **Notes:** you can also use falsy values instead of ommit the parameter (`null`,`undefined`,`0`,etc.)
+  **Notes:** you can also use falsy values instead of omit the parameter (`null`,`undefined`,`0`,etc.)
 
 ### Return value
 An object with 3 properties:
