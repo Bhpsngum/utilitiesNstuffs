@@ -50,7 +50,7 @@ Object.prototype.get = function()
           {
             let parent=Array.from(prnt);
             parent.push(i);
-            if (i===qS)
+            if (i===qS.toString())
             {
               results.push({path:parent,value:object[i]});
               if (Object.keys(object[i]).length) search(parent,object[i]);
