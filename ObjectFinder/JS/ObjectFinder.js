@@ -51,7 +51,7 @@ Object.prototype.get = function()
             let parent=[];
             for (let ij of prnt) parent[parent.length]=ij;
             parent[parent.length]=i;
-            if (i===qS)
+            if (i===qS.toString())
             {
               results[results.length]={path:parent,value:object[i]};
               if (Object.keys(object[i]).length) search(parent,object[i]);
