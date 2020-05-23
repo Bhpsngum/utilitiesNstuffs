@@ -74,7 +74,8 @@ String.prototype.replace = function replace()
                 }
             }
         }
-        let mm=[...m];
+        let mm=[];
+        for (let ij of m) mm[mm.length]=ij;
         for (let i=0;i<m.length;i+=2)
         {
             let st=m[i];
