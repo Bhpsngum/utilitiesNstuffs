@@ -54,7 +54,7 @@ Feel free to contribute your idea by creating pull requests or open new issues, 
    
   </details>
   
-  **[Object Finder](#object-finder)**
+  **[ObjectFinder](#objectfinder)**
   
   <details>
     <summary markdown="span">Contents</summary>
