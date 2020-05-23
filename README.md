@@ -296,7 +296,25 @@ Depends on the value of `isGlobalSearch`:
 
 ### Examples
 ```js
-
+> {a:1}.get("a")
+1
+> {a:1}.get("b")
+undefined
+> let object = {a:{a:{b:{c:{d:{a:1}}}}}}
+undefined
+> object.get("a",true)
+Array (3)
+  0:
+    path: ["a"]
+    value: {a: {b: {c: {d: {a: 1}}}}}
+  1:
+    path: ["a","a"]
+    value: {b: {c: {d: {a: 1}}}}
+  2:
+    path: ["a","a","b","c","d","a"]
+    value: 1
+> object.get(["a","a","b","c","d"])
+{a: 1}
 ```
 ### Uses
 More efficiency object gathering and lower chance of getting errors.
@@ -309,5 +327,5 @@ WeakMap
 Object.prototype.toString.call
 Object.keys
 ```
-if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/newStringReplacer/JS/newStringReplacer.util.js).
+if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/ObjectFinder/JS/ObjectFinder.util.js).
 
