@@ -48,7 +48,8 @@ Object.prototype.get = function()
         {
           Object.keys(object).forEach(function(i)
           {
-            let parent=Array.from(prnt);
+            let parent=[];
+            for (let ij of prnt) parent[parent.length]=ij;
             parent[parent.length]=i;
             if (i===qS)
             {
