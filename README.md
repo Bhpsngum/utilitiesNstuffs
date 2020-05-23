@@ -53,6 +53,25 @@ Feel free to contribute your idea by creating pull requests or open new issues, 
    * **[Sensitive functions](#sensitive-functions-1)**
    
   </details>
+  
+  **[Object Finder](#object-finder)**
+  
+  <details>
+    <summary markdown="span">Contents</summary>
+ 
+   * **[Languages](#languages-2)**
+    
+   * **[Requirements](#requirements-2)**
+   
+   * **[Syntax](#syntax-2)**
+   
+   * **[Return value](#return-value-2)**
+   
+   * **[Examples](#examples-2)**
+   
+   * **[Sensitive functions](#sensitive-functions-2)**
+   
+  </details>
 </details>
 
 ## Where I can test them?
@@ -171,7 +190,7 @@ var The_'Little'_Hamster_969 = '{/*even more thing*/}';
 which will return the `Unexpected identifier Error` when it came to Modding. So that how the code works: just edit the variable to a proper JS variable name :D
 ### Sensitive functions
 ```js
-Error.prototype
+Error
 eval
 console.warn
 Object.defineProperties
@@ -248,7 +267,47 @@ for some cases that String replacement is more useful than Regular Expression re
 String.prototype.replace (before script execution)
 *.prototype.toString
 String.prototype.toUpperCase
-RegExp.prototype
+RegExp
 String.prototype.oldReplace (after script execution)
 ```
 if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/newStringReplacer/JS/newStringReplacer.util.js).
+
+## [ObjectFinder](/ObjectFinder/JS/ObjectFinder.js)
+Provide a new powerful function for finding properties in the object
+### Languages
+[JavaScript (ECMAScript)](/ObjectFinder/JS/ObjectFinder.js)
+
+### Requirements
+None
+
+### Syntax
+`object.get(SearchQuery,isGlobalSearch)` where:
+* **`SearchQuery`** : String or Array (any others will be converted to string) for searching.
+  * **String**: If you want to search the first-level property of an object or do a global search (see `isGlobalSearch` below)
+  * **Array**: defines the search tree from the highest level property in the first element of an array to the lowest one in the last element.
+* **`isGlobalSearch`** (`Boolean` - if `SearchQuery` is not an array) : Search for every properties in all levels that have the name matches with the query.
+
+### Return value
+Depends on the value of `isGlobalSearch`:
+* `false` : value of the property
+* `true` : An array with each element is an object contains 2 properties:
+  * `path` : An array shows the path of the property (like array `SearchQuery`)
+  * `value` : The values that comes along with the path above
+
+### Examples
+```js
+
+```
+### Uses
+More efficiency object gathering and lower chance of getting errors.
+### Sensitive functions
+```js
+Array.from
+Array.isArray
+*.prototype.toString
+WeakMap
+Object.prototype.toString.call
+Object.keys
+```
+if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/newStringReplacer/JS/newStringReplacer.util.js).
+
