@@ -320,8 +320,8 @@ Array (3)
 More efficiency object gathering and lower chance of getting errors.
 ### Sensitive functions
 ```js
-Array.from
 Array.isArray
+Error
 *.prototype.toString
 WeakMap
 Object.prototype.toString.call
