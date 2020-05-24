@@ -15,6 +15,7 @@ Object.prototype.get = function()
   }
   else
   {
+    if (qS == void 0) return;
     if (arguments[1] === true)
     {
       function isCyclic(object) {
