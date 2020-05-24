@@ -15,6 +15,7 @@ Object.prototype.get = function()
   }
   else
   {
+    if (qS == void 0) return;
     if (arguments[1] === true)
     {
       function isCyclic(object) {
@@ -46,18 +47,6 @@ Object.prototype.get = function()
         let results=[];
         function search(prnt,object)
         {
-          function toString(param)
-          {
-              switch(param)
-              {
-                  case void 0:
-                      return "undefined";
-                  case null:
-                      return "null";
-                  default:
-                      return param.toString();
-              }
-          }
           Object.keys(object).forEach(function(i)
           {
             let parent=[];
