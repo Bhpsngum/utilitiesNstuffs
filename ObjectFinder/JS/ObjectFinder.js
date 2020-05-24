@@ -46,12 +46,24 @@ Object.prototype.get = function()
         let results=[];
         function search(prnt,object)
         {
+          function toString(param)
+          {
+              switch(param)
+              {
+                  case void 0:
+                      return "undefined";
+                  case null:
+                      return "null";
+                  default:
+                      return param.toString();
+              }
+          }
           Object.keys(object).forEach(function(i)
           {
             let parent=[];
             for (let ij of prnt) parent[parent.length]=ij;
             parent[parent.length]=i;
-            if (i===qS.toString())
+            if (i===toString(qS))
             {
               results[results.length]={path:parent,value:object[i]};
               if (Object.keys(object[i]).length) search(parent,object[i]);
