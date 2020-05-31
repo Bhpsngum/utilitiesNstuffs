@@ -7,70 +7,72 @@ Feel free to contribute your idea by creating pull requests or open new issues, 
 
 <details>
   <summary markdown="span">Table of contents</summary>
-  
+
   **[Where I can test them?](#where-i-can-test-them)**
 
   **[How to get script link](#how-to-get-script-link)**
-  
+
   **[Structure for one utility/stuff explanation](#structure-for-one-utilitystuff-explanation)**
-  
+
   **[Contribution](#contribution)**
-  
+
   **[getProperVariableName (JS Only)](#getpropervariablename-js-only)**
-  
+
   <details>
     <summary markdown="span">Contents</summary>
- 
+
    * **[Languages](#languages)**
-    
+
    * **[Requirements](#requirements)**
-   
+
    * **[Syntax](#syntax)**
-   
+
    * **[Return value](#return-value)**
-   
+
    * **[Examples](#examples)**
-   
+
+   * **[Debugger](#debugger)**
+
    * **[Sensitive functions](#sensitive-functions)**
-   
+
   </details>
-  
+
   **[newStringReplacer.js](#newstringreplacerjs)**
-  
+
   <details>
     <summary markdown="span">Contents</summary>
- 
+
    * **[Languages](#languages-1)**
-    
+
    * **[Requirements](#requirements-1)**
-   
+
    * **[Syntax](#syntax-1)**
-   
+
    * **[Return value](#return-value-1)**
-   
+
    * **[Examples](#examples-1)**
-   
+
    * **[Sensitive functions](#sensitive-functions-1)**
-   
+
   </details>
-  
+
   **[ObjectFinder](#objectfinder)**
-  
+
   <details>
     <summary markdown="span">Contents</summary>
- 
+
    * **[Languages](#languages-2)**
-    
+
    * **[Requirements](#requirements-2)**
-   
+
    * **[Syntax](#syntax-2)**
-   
+
    * **[Return value](#return-value-2)**
-   
+
    * **[Examples](#examples-2)**
-   
+
    * **[Sensitive functions](#sensitive-functions-2)**
-   
+
   </details>
 </details>
 
@@ -90,7 +92,7 @@ if you want a utilized version: insert `.util` before the file extension
 
 **Note:** both of them can be combined to create a utilized & minified file
 
-For example: 
+For example:
 ```
 /getProperVariableName/JS/getProperVariableName.min.js
 /newStringReplacer/JS/newStringReplacer.util.min.js
@@ -132,19 +134,21 @@ Got it? Now let's go! :D
 ### Languages
 [JavaScript (ECMAScript)](/getProperVariableName/JS/getProperVariableName.js)
 
-### Requirements 
+### Requirements
 None
 
 ### Syntax
-```string.getProperJSVariableName(mode,strictImmutable)``` where:
-* **`mode`** : specify JavaScript mode, "strict" or omitted
-* **`strictImmutable`**: in case of your input string is a immutable variable (global objects or properties of them), Your string will be converted to mutable variable name. `true`, `false` or omited. Set to true to create mutable variable
-
-  **Notes:** you can also use falsy values instead of omit the parameter (`null`,`undefined`,`0`,etc.)
+```string.getProperJSVariableName(mode,strictImmutable,debugger)``` where:
+* **`mode`** (SString) : specify JavaScript mode, "strict" or omitted
+* **`strictImmutable`** (Boolean): in case of your input string is a immutable variable (global objects or properties of them), Your string will be converted to mutable variable name. `true`, `false` or omited. Set to true to create mutable variable
+* **debugger** (Boolean): In case of you want to see the variable check passing, set this to `true`.
+  **Notes:** Any values other than `true` will be converted to `false`
 
 ### Return value
-An object with 3 properties:
-* **`name`** (String) : a string that can be set as JS Variable from your input string 
+If `debugger` is set to false:
+* A string that can be set as JS Variable from your input string
+If `debugger` is set to `true`. An object with 3 properties is returned:
+* **`name`** (String) : A string that can be set as JS Variable from your input string
 * **`mutable`** (Boolean): Indicates if the input variable name is mutable or not.
 
   In addition, a warning will be displayed in a console for more information
@@ -152,23 +156,26 @@ An object with 3 properties:
 
 ### Examples
 ```js
-> "It's my funny variable name".getProperJSVariableName().name
+> "It's my funny variable name".getProperJSVariableName()
 "It_s_my_funny_variable_name"
 
 > "69 likes!".getProperJSVariableName()
-{name: "_69_likes_", proper: false, mutable: true}
+"_69_likes_"
+
+> "69 likes!".getProperJSVariableName(null,null,true)
+{name: "_69_likes_", proper: false, immutable: true}
 
 > "static".getProperJSVariableName()
-{name: "static", proper: true, mutable: true}
+"static"
 
-> "static".getProperJSVariableName("strict")
-{name: "_static", proper: false, mutable: true}
+> "static".getProperJSVariableName("strict",null,true)
+{name: "_static", proper: false, immutable: true}
 
-> "window".getProperJSVariableName()
-{name: "window", proper: true, mutable: false}
+> "window".getProperJSVariableName(null,null,true)
+{name: "window", proper: true, immutable: false}
 
 > "window".getProperJSVariableName("strict",true);
-{name: "_window", proper: true, mutable: true}
+"_window"
 ```
 or if you want to call it as a property, you can use `myString.properJSVariableName` or `myString.properStrictJSVariableName` instead:
 ```js
@@ -181,6 +188,8 @@ or if you want to call it as a property, you can use `myString.properJSVariableN
 > "static".properStrictJSVariableName
 "_static"
 ```
+### Debugger
+If you want to use this as a
 ### Uses
 in my extension (Ship Editor sections) where users can name their ship like "69 is Legendary!" or "The 'Little' Hamster" and the modexport code return like
 ```js
@@ -219,7 +228,7 @@ None
   * `e` : Ending - matches only at the end of the string
   * `m` : Multiline (available for `b` and `e` flags) - treats one line as a main string
   * `i` : case-Insensitive - matches every results regardless of Lowercase or Uppercase form
-  
+
    **Notes:**
     * A combination of both `b` and `e` flags can be called as the "Full String replacement" (except when `m` flag is enabled)
     * `b` and `e` flags can be used for new line if `m` flag is enabled.
@@ -328,4 +337,3 @@ Object.prototype.toString.call
 Object.keys
 ```
 if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/ObjectFinder/JS/ObjectFinder.util.js).
-

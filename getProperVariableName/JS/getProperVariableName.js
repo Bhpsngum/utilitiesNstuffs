@@ -1,12 +1,6 @@
 String.prototype.getProperJSVariableName = function getProperJSVariableName()
 {
   let declare=["var","let"];
-  CustomError = function(name,message)
-  {
-    var a=new Error(message);
-    a.name=name;
-    return a;
-  }
   function slice(str,firstIndex,lastIndex)
   {
     let st="";
@@ -57,7 +51,10 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
       s="'use strict';";
       break;
     default:
-      throw new CustomError("ModeError","Invalid javascript mode '"+mode+"'");
+      let emg = new Error();
+      emg.name = "ModeError";
+      emg.message = "Invalid javascript mode '"+mode+"'";
+      throw emg;
   }
   try
   {
@@ -105,7 +102,7 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
   var temp=window[inp];
   window[inp]=window[inp]+1;
   let opt={name:inp,mutable:!(temp == window[inp]||inp == "NaN"),proper:this+""==inp};
-  if (!opt.mutable) 
+  if (!opt.mutable)
   {
     if (!arguments[1]) console.warn(`'${inp}' is initially defined as a global variable or the properties of them, therefore it's immutable or read-only. Setting them won’t have an effect. Avoid using this input as a variable name.`);
     else
@@ -115,13 +112,13 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
     }
   }
   window[inp]=temp;
-  return opt;
+  return (arguments[2] === true)?opt:opt.name;
 };
 Object.defineProperties(String.prototype, {
   properJSVariableName: {
-    get() {return this.getProperJSVariableName().name;}
+    get() {return this.getProperJSVariableName()}
   },
   properStrictJSVariableName: {
-    get() {return this.getProperJSVariableName("strict").name;}
+    get() {return this.getProperJSVariableName("strict")}
   }
 });
