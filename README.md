@@ -142,11 +142,13 @@ None
 * **`mode`** (SString) : specify JavaScript mode, "strict" or omitted
 * **`strictImmutable`** (Boolean): in case of your input string is a immutable variable (global objects or properties of them), Your string will be converted to mutable variable name. `true`, `false` or omited. Set to true to create mutable variable
 * **debugger** (Boolean): In case of you want to see the variable check passing, set this to `true`.
+
   **Notes:** Any values other than `true` will be converted to `false`
 
 ### Return value
 If `debugger` is set to false:
 * A string that can be set as JS Variable from your input string
+
 If `debugger` is set to `true`. An object with 3 properties is returned:
 * **`name`** (String) : A string that can be set as JS Variable from your input string
 * **`mutable`** (Boolean): Indicates if the input variable name is mutable or not.
@@ -188,8 +190,6 @@ or if you want to call it as a property, you can use `myString.properJSVariableN
 > "static".properStrictJSVariableName
 "_static"
 ```
-### Debugger
-If you want to use this as a
 ### Uses
 in my extension (Ship Editor sections) where users can name their ship like "69 is Legendary!" or "The 'Little' Hamster" and the modexport code return like
 ```js
