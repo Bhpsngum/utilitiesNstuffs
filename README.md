@@ -139,7 +139,7 @@ None
 
 ### Syntax
 ```string.getProperJSVariableName(mode,strictImmutable,debugger)``` where:
-* **`mode`** (SString) : specify JavaScript mode, "strict" or omitted
+* **`mode`** (String) : specify JavaScript mode, "strict" or omitted
 * **`strictImmutable`** (Boolean): in case of your input string is a immutable variable (global objects or properties of them), Your string will be converted to mutable variable name. `true`, `false` or omited. Set to `true` to create mutable variable
 * **`debugger`** (Boolean): In case of you want to see the variable check passing, set this to `true`.
 
