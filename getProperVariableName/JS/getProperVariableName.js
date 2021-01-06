@@ -9,7 +9,7 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
   }
   function check(s,l,str)
   {
-    eval(s+"function test(){"+l+" "+str+"}");
+    eval("(function(){"+s+l+" "+str+"})();");
   }
   let inp=(this=="")?"_":this+"";
   if (inp == "async" || inp == "await") inp="_"+inp;
