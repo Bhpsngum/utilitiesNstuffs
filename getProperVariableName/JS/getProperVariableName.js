@@ -12,6 +12,7 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
     eval(s+"function test(){"+l+" "+str+"}");
   }
   let inp=(this=="")?"_":this+"";
+  if (inp == "async" || inp == "await") inp="_"+inp;
   switch(inp[0])
   {
     case "0":

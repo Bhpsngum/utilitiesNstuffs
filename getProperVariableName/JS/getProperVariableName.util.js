@@ -6,6 +6,7 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
     eval(s+"function test(){"+l+" "+str+"}");
   }
   let inp=(this=="")?"_":(this.replace(/^(\d)/g,"_$1").replace(/(=|\n|\r|\s|;|,)/g,"_"));
+  if (["async","await"].indexOf(inp) != -1) inp="_"+inp;
   let s,mode=arguments[0]||"";
   switch (mode)
   {
