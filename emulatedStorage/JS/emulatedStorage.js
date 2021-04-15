@@ -14,17 +14,17 @@
   Storage.get = function get() {
     throwError("get", 1, arguments);
     var storageName = toString(arguments[0]);
-    var localStorage;
+    var storage;
     try {
-      if (arguments[1]) throw "emulate";
-      localStorage = window[storageName];
-      if (!(localStorage instanceof Storage)) throw "no storages available";
+      if (arguments[1]) throw "force emulated";
+      storage = window[storageName];
+      if (!(storage instanceof Storage)) throw "no storages available";
     }
     catch (e) {
-      localStorage = emulatedStorages.get(storageName);
-      if (!(localStorage instanceof Storage)) {
+      storage = emulatedStorages.get(storageName);
+      if (!(storage instanceof Storage)) {
         var dump = new Map();
-        var updateStorage = function (storage) {
+        var updateStorage = function () {
           var dnames = Array.from(dump.keys());
           for (let name of Array.from(new Set([dnames,Object.keys(storage)].flat()))) {
             if (props.indexOf(name) == -1 && name != "__proto__") {
@@ -33,11 +33,11 @@
             }
           }
         }
-        localStorage = {
+        storage = {
           setItem: function setItem() {
             throwError("setItem", 2, arguments);
             dump.set(toString(arguments[0]), toString(arguments[1]));
-            updateStorage(this);
+            updateStorage();
           },
           getItem: function getItem() {
             throwError("getItem", 1, arguments);
@@ -46,11 +46,11 @@
           removeItem: function removeItem() {
             throwError("removeItem", 1, arguments);
             dump.delete(toString(arguments[0]));
-            updateStorage(this);
+            updateStorage();
           },
           clear: function clear() {
             dump.clear();
-            updateStorage(this);
+            updateStorage();
           },
           key: function key() {
             throwError("key", 1, arguments);
@@ -58,14 +58,14 @@
           },
           __proto__: Storage.prototype
         }
-        Object.defineProperties(localStorage, {
+        Object.defineProperties(storage, {
           length: {
             get() { return dump.size }
           }
         });
-        emulatedStorages.set(storageName, localStorage);
+        emulatedStorages.set(storageName, storage);
       }
     }
-    return localStorage
+    return storage
   }
 })();
