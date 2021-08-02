@@ -31,16 +31,10 @@
       if (isNullish(type)) obj[type] = true;
       else obj[type] = value;
     }
-  }, MultiType = function MultiType () {
-    let m = new multiType(...arguments);
-    m.constructor = MultiType;
-    if (new.target != null) Object.assign(this, m);
-    return m;
   }, multiType = function MultiType() {
     let t = nullish.reduce(function(a,b){return a[b]=false,a},{});
     setValue(t,arguments);
     Object.assign(this, {
-      constructor: MultiType,
       set: function set () {
         throwError("set",arguments,true);
         setValue(t,arguments);
@@ -102,8 +96,15 @@
     Object.defineProperty(this, 'isEmpty', {
       get() {return checkEmpty(t)}
     })
+  }, proto = new multiType;
+  var MultiType = function MultiType () {
+    let m = new multiType(...arguments);
+    Object.setPrototypeOf(m, proto);
+    if (new.target != undefined) Object.assign(this, m);
+    return m;
   }
-  MultiType.prototype = new MultiType;
+  proto.constructor = MultiType;
+  MultiType.prototype = proto;
   var getRepresentative = function getRepresentative (type) {
     return [{},"",0,[],Symbol(),false,new MultiType,function(){},0n,null,undefined][all_types.indexOf(checkType(type))]
   }
