@@ -70,6 +70,7 @@
         let n = t.number;
         return typeof n == "number"?n:this;
       },
+      [Symbol.toStringTag]: "MultiType",
       toJSON: function toJSON () {
         var json = {};
         for (let i of types) {
@@ -103,6 +104,7 @@
     if (new.target != undefined) Object.assign(this, m);
     return m;
   }
+  Object.setPrototypeOf(proto, Object.prototype);
   proto.constructor = MultiType;
   MultiType.prototype = proto;
   var getRepresentative = function getRepresentative (type) {
