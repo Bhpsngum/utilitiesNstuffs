@@ -1,5 +1,7 @@
 ;(function(){
-  var types = ["object","string","number","array","symbol","boolean","multi","function","bigint"], nullish = ["null","undefined"], getType = function getType (value) {
+  var types = ["object","string","number","array","symbol","boolean","multi","function","bigint"], nullish = ["null","undefined"], all_types = [...types, ...nullish], isNullish = function(type) {
+    return nullish.indexOf(type) != -1
+  }, getType = function getType (value) {
     var type = typeof value;
     if (type == "object") {
       if (value instanceof [].constructor) return "array";
@@ -21,12 +23,12 @@
     return !Math.max(...t)
   }, checkType = function(type) {
     var t = (type || "").toString().toLowerCase();
-    if (types.concat(nullish).indexOf(t) == -1) throw new TypeError("Unknown variable type");
+    if (all_types.indexOf(t) == -1) throw new TypeError("Unknown variable type");
     return t
   }, setValue = function(obj,values) {
     for (let value of values) {
       var type = getType(value);
-      if (nullish.indexOf(type) != -1) obj[type] = true;
+      if (isNullish(type)) obj[type] = true;
       else obj[type] = value;
     }
   }, MultiType = function MultiType () {
@@ -52,7 +54,7 @@
         throwError("delete",arguments,true);
         for (let type of arguments) {
           type = checkType(type);
-          if (nullish.indexOf(type) != -1) t[type] = false;
+          if (isNullish(type)) t[type] = false;
           else delete t[type];
         }
       },
@@ -63,7 +65,7 @@
       has: function has (type) {
         throwError("has",arguments);
         type = checkType(type);
-        if (nullish.indexOf(type) != -1) return t[type] === true;
+        if (isNullish(type)) return t[type] === true;
         return getType(t[type]) == type;
       },
       toString: function toString () {
@@ -103,7 +105,7 @@
   }
   MultiType.prototype = new MultiType;
   var getRepresentative = function getRepresentative (type) {
-    return [{},"",0,[],Symbol(),false,new MultiType,function(){},0n,null,undefined][types.concat(nullish).indexOf(checkType(type))]
+    return [{},"",0,[],Symbol(),false,new MultiType,function(){},0n,null,undefined][all_types.indexOf(checkType(type))]
   }
   MultiType.parse = function parse (json) {
     json = JSON.parse(json);
