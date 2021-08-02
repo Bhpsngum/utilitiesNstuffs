@@ -1,10 +1,10 @@
-(function (){
-  var types = ["object","string","number","array","symbol","boolean","null","multi","function"], getType = function(value) {
+;(function(){
+  var types = ["object","string","number","array","symbol","boolean","multi","function","bigint"], nullish = ["null","undefined"], getType = function(value) {
     var type = typeof value;
     if (type == "object") {
       if (Array.isArray(value)) return "array";
       if (value === null) return "null";
-      if (value.constructor == MultiType) return "multi";
+      if (value.constructor == multiType) return "multi";
       return type;
     }
     return type;
@@ -17,103 +17,117 @@
       if (!check) delete obj[i];
       t.push(Number(check));
     }
-    obj.isEmpty = !Math.max(...t);
+    for (let i of nullish) t.push(obj[i] === true);
+    return !Math.max(...t)
   }, checkType = function(type) {
     var t = (type || "").toString().toLowerCase();
-    if (types.indexOf(t) == -1 && t != "undefined") throw new TypeError("Unknown variable type");
-    return t;
+    if (types.concat(nullish).indexOf(t) == -1) throw new TypeError("Unknown variable type");
+    return t
   }, setValue = function(obj,values) {
     for (let value of values) {
       var type = getType(value);
-      if (type == "undefined") obj[type] = true;
+      if (nullish.indexOf(type) != -1) obj[type] = true;
       else obj[type] = value;
     }
-    checkEmpty(obj);
-  }, MultiType = class {
-    constructor() {
-      this.undefined = false;
-      setValue(this,arguments);
-    }
-    toJSON () {
-      let json={undefined:this.undefined};
+  }
+  var multiType = function MultiType() {
+    let t = nullish.reduce(function(a,b){return a[b]=false,a},{});
+    setValue(t,arguments);
+    Object.assign(this, {
+      set: function set () {
+        throwError("set",arguments,true);
+        setValue(t,arguments);
+      },
+      get: function get (type) {
+        throwError("get",arguments);
+        type = checkType(type);
+        return t[type]
+      },
+      delete: function () {
+        throwError("delete",arguments,true);
+        for (let type of arguments) {
+          type = checkType(type);
+          if (nullish.indexOf(type) != -1) t[type] = false;
+          else delete t[type];
+        }
+      },
+      clear: function clear () {
+        for (let i of types) delete t[i];
+        for (let i of nullish) t[i] = false;
+      },
+      has: function has (type) {
+        throwError("has",arguments);
+        type = checkType(type);
+        if (nullish.indexOf(type) != -1) return t[type] === true;
+        return getType(t[type]) == type;
+      },
+      toString: function toString () {
+        let y = t.string;
+        return typeof y == "string"?y:JSON.stringify(this);
+      },
+      valueOf: function valueOf () {
+        let n = t.number;
+        return typeof n == "number"?n:this;
+      },
+      toJSON: function toJSON () {
+        var json = {};
+        for (let i of types) {
+          if (t[i] !== void 0) {
+            switch(i) {
+              case "multi":
+                let f = {class:"MultiType"};
+                if (t[i]==this) f.circular=true;
+                else f = JSON.parse(JSON.stringify(t[i]));
+                json[i] = f;
+                break;
+              default:
+                json[i] = t[i];
+            }
+          }
+        }
+        for (let i of nullish) if (t[i] == true) json[i] = true;
+        return {class:"MultiType",values:json};
+      }
+    });
+    for (let i of types) Object.defineProperty(this, i, {
+      get() {return t[i]}
+    });
+    Object.defineProperty(this, 'isEmpty', {
+      get() {return checkEmpty(t)}
+    })
+  }
+  var proto = new multiType;
+  var MultiType = function MultiType () {
+    let m = new multiType(...arguments);
+    Object.setPrototypeOf(m, proto);
+    if (new.target != undefined) Object.assign(this, m);
+    return m;
+  }
+  MultiType.prototype = proto;
+  MultiType.parse = function parse (json) {
+    json = JSON.parse(json);
+    let m = new MultiType(), circular = false;
+    if (json.class == "MultiType" && json.values && typeof json.values == "object") {
       for (let i of types) {
-        if (this[i]!== void 0) {
-          switch(i) {
+        if (json.values.hasOwnProperty(i)) {
+          let v = json.values[i];
+          switch (i) {
             case "multi":
-              let f = {class:"MultiType"};
-              if (this[i]==this) f.circular=true;
-              else f.values=this[i];
-              json[i] = f;
+              if (v.class="MultiType") {
+                if (v.circular === true) m.set(m);
+                else m.set(MultiType.parse(JSON.stringify(v)))
+              }
               break;
             default:
-              json[i] = this[i];
+              if (getType(v) == i) m.set(v)
           }
         }
       }
-      return {class:"MultiType",values:json};
+      var nullish_vals = [null, void 0];
+      nullish.forEach(function(i,j){if (json.values[i]) m.set(nullish_vals[j])});
     }
+    return m;
   }
-  MultiType.prototype.set = function set () {
-    throwError("set",arguments,true);
-    setValue(this,arguments);
-  }
-  MultiType.prototype.get = function get (type) {
-    checkEmpty(this);
-    throwError("get",arguments);
-    type = checkType(type);
-    if (type == "undefined") return void 0;
-    return (getType(this[type]) == type)?this[type]:void 0;
-  }
-  MultiType.prototype.remove = function remove (...types) {
-    throwError("remove",arguments,true);
-    for (let type of types) {
-      type = checkType(type);
-      if (type == "undefined") this[type] = false;
-      else this[type] = void 0;
-    }
-    checkEmpty(this);
-  }
-  MultiType.prototype.has = function has (type) {
-    checkEmpty(this);
-    throwError("has",arguments);
-    type = checkType(type);
-    if (type == "undefined") return this[type] === true;
-    return getType(this[type]) == type;
-  }
-  MultiType.prototype.toString = function () {
-    checkEmpty(this);
-    let y = this.string;
-    return typeof y == "string"?y:"undefined";
-  }
-  MultiType.prototype.valueOf = function () {
-    checkEmpty(this);
-    let n = this.number;
-    return typeof n == "number"?n:NaN;
-  }
-  MultiType.prototype.clear = function clear () {
-    for (let i of types) this[i] = void 0;
-    this.undefined = false;
-    checkEmpty(this);
-  }
-  MultiType.parse = function(json) {
-    json = JSON.parse(json);
-    let t = new MultiType(), circular = false;
-    if (json.class == "MultiType" && json.values && typeof json.values == "object") {
-      for (let i of types) {
-        let v = json.values[i];
-        switch (i) {
-          case "multi":
-            if (v.class="MultiType" && v.circular === true) circular = true;
-            else t[i] = MultiType.parse(v);
-            break;
-          default:
-            t[i] = v;
-        }
-      }
-      if (circular) t.set(t);
-      checkEmpty(t);
-    }
-    return t;
-  }
-  window.MultiType = MultiType;
+  MultiType.getType = getType;
+  window.MultiType = MultiType
 })();
