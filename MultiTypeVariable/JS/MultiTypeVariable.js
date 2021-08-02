@@ -1,10 +1,10 @@
 ;(function(){
-  var types = ["object","string","number","array","symbol","boolean","multi","function","bigint"], nullish = ["null","undefined"], getType = function(value) {
+  var types = ["object","string","number","array","symbol","boolean","multi","function","bigint"], nullish = ["null","undefined"], getType = function getType (value) {
     var type = typeof value;
     if (type == "object") {
-      if (Array.isArray(value)) return "array";
+      if (value instanceof [].constructor) return "array";
       if (value === null) return "null";
-      if (value.constructor == multiType) return "multi";
+      if (value instanceof MultiType) return "multi";
       return type;
     }
     return type;
@@ -29,11 +29,16 @@
       if (nullish.indexOf(type) != -1) obj[type] = true;
       else obj[type] = value;
     }
-  }
-  var multiType = function MultiType() {
+  }, MultiType = function MultiType () {
+    let m = new multiType(...arguments);
+    m.constructor = MultiType;
+    if (new.target != null) Object.assign(this, m);
+    return m;
+  }, multiType = function MultiType() {
     let t = nullish.reduce(function(a,b){return a[b]=false,a},{});
     setValue(t,arguments);
     Object.assign(this, {
+      constructor: MultiType,
       set: function set () {
         throwError("set",arguments,true);
         setValue(t,arguments);
@@ -96,14 +101,10 @@
       get() {return checkEmpty(t)}
     })
   }
-  var proto = new multiType;
-  var MultiType = function MultiType () {
-    let m = new multiType(...arguments);
-    Object.setPrototypeOf(m, proto);
-    if (new.target != undefined) Object.assign(this, m);
-    return m;
+  MultiType.prototype = new MultiType;
+  var getRepresentative = function getRepresentative (type) {
+    return [{},"",0,[],Symbol(),false,new MultiType,function(){},0n,null,undefined][types.concat(nullish).indexOf(checkType(type))]
   }
-  MultiType.prototype = proto;
   MultiType.parse = function parse (json) {
     json = JSON.parse(json);
     let m = new MultiType(), circular = false;
@@ -129,5 +130,6 @@
     return m;
   }
   MultiType.getType = getType;
+  MultiType.getRepresentative = getRepresentative;
   window.MultiType = MultiType
 })();
