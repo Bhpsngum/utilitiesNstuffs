@@ -3,11 +3,11 @@
     return nullish.indexOf(type) != -1
   }, getType = function getType (value) {
     var type = typeof value;
-    if (type == "object") {
-      if (value instanceof [].constructor) return "array";
-      if (value === null) return "null";
-      if (value instanceof MultiType) return "multi";
-      return type;
+    if (type == "object") switch (true) {
+      case value === null: return "null";
+      case Array.isArray(value): return "array";
+      case value instanceof MultiType: return "multi";
+      default: return type;
     }
     return type;
   }, throwError = function(name,args,isMore) {
@@ -23,7 +23,7 @@
     return !Math.max(...t)
   }, checkType = function(type) {
     var t = (type || "").toString().toLowerCase();
-    if (all_types.indexOf(t) == -1) throw new TypeError("Unknown variable type");
+    if (all_types.indexOf(t) == -1) throw new TypeError("Invalid variable type");
     return t
   }, setValue = function(obj,values) {
     for (let value of values) {
