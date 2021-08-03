@@ -64,7 +64,7 @@
           let val = t[type];
           if (isType(val,type)) return val.toString()
         } catch (e) {}
-        return this.toJSON()
+        return JSON.stringify(this)
       },
       [Symbol.toPrimitive]: function() {
         for (let type of ["number","bigint","string","boolean","array","multi","function","symbol","object"]) try { 
