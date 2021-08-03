@@ -18,62 +18,11 @@ Feel free to contribute your idea by creating pull requests or open new issues, 
 
   **[getProperVariableName (JS Only)](#getpropervariablename-js-only)**
 
-  <details>
-    <summary markdown="span">Contents</summary>
-
-   * **[Languages](#languages)**
-
-   * **[Requirements](#requirements)**
-
-   * **[Syntax](#syntax)**
-
-   * **[Return value](#return-value)**
-
-   * **[Examples](#examples)**
-
-   * **[Debugger](#debugger)**
-
-   * **[Sensitive functions](#sensitive-functions)**
-
-  </details>
-
   **[newStringReplacer.js](#newstringreplacerjs)**
-
-  <details>
-    <summary markdown="span">Contents</summary>
-
-   * **[Languages](#languages-1)**
-
-   * **[Requirements](#requirements-1)**
-
-   * **[Syntax](#syntax-1)**
-
-   * **[Return value](#return-value-1)**
-
-   * **[Examples](#examples-1)**
-
-   * **[Sensitive functions](#sensitive-functions-1)**
-
-  </details>
 
   **[ObjectFinder](#objectfinder)**
 
-  <details>
-    <summary markdown="span">Contents</summary>
-
-   * **[Languages](#languages-2)**
-
-   * **[Requirements](#requirements-2)**
-
-   * **[Syntax](#syntax-2)**
-
-   * **[Return value](#return-value-2)**
-
-   * **[Examples](#examples-2)**
-
-   * **[Sensitive functions](#sensitive-functions-2)**
-
-  </details>
+  **[MultiTypeVariable](#multitypevariable)**
 </details>
 
 ## Where I can test them?
@@ -347,7 +296,8 @@ A variable that can act as various types
 * ECMAScript version: ES2020 or higher
 
 ### Syntax
-`new MultiType(...values)` or `MultiType(...values)` where `...values` is the list of parameters in various types
+`new MultiType(...values)` or `MultiType(...values)` where `values` is the list of parameters in various types
+
 Example:
 ```js
 var multiType = new MultiType({},"",0,[],false,function(){},Symbol(),0n,new MultiType,null,undefined)
@@ -389,6 +339,7 @@ Uses: `multiType[type]`. For example: `multiType['number']`
 #### `multiType.set(...values)`
 
 Set list of `values` to the variable. Requires at least 1 argument.
+
 Example:
 ```js
 multiType.set(1,"1",[1])
@@ -396,8 +347,11 @@ multiType.set(1,"1",[1])
 
 #### `multiType.get(value_type)`
 Get value of `type` stored on the variable. Requires 1 argument.
+
 Returns the value of the given `type` or `undefined` if none found
+
 **Note:** Calling this method with nullish types will return the same result as `multiType.has(type)`
+
 Example:
 ```js
 > multiType.get("number")
@@ -407,24 +361,27 @@ Example:
 #### `multiType.has(type)`
 Check if the variable has any value with the type `type`
 Returns `true` if the variable contains a value with the given type, `false` otherwise
+
 Example:
 ```js
 > multiType.has("string")
 < true
 ```
 
-#### `multiType.remove(type)`
+#### `multiType.delete(type)`
 Remove the value of the specified `type` from the variable
+
 Example:
 ```js
-multiType.remove("array")
+multiType.delete("array")
 ```
 
 #### `multiType.clear()`
 Remove all values from the variable. `multiType.isEmpty` will return `true` after this method
 
 #### `multiType.toJSON()`
-Transform the variable into a MultiType-encoded JSON string, which can be parsed back as a new MultiType variable using `MultiType.parseJSON(json)`
+Transform the variable into a MultiType-encoded JSON string, which can be parsed back as a new MultiType variable using [`MultiType.parseJSON(json)`](#multitypeparsejsonjson)
+
 Example:
 ```js
 > JSON.stringify(multiType)
@@ -434,15 +391,55 @@ Example:
 **Note:** Only `function` type can't be preserved through this conversion.
 
 #### `multiType.toString()`
-Returns the `multiType.string` value if it does have a `string` type value, `multiType.toJSON()` otherwise
+Returns the `multiType.string` value if it does have a `string` type value, [`multiType.toJSON()`](#multitypetojson) otherwise
 
+#### `multiType[Symbol.toPrimitive]()` (to primitive value)
+It will try to convert the number of those types (from first to last), if the value is present and the converted value is a number then it returns the converted value, otherwise it goes to the next type in the list:
+|`number` --> `bigint` --> `string` --> `boolean` --> `array` --> `multi` --> `function` --> `symbol` --> `object`|
+|-|
+
+Returns `null` if the above check fails.
+
+### `MultiType` methods
+
+#### `MultiType.parseJSON(json))`
+Creates a new `MultiType` variable with values parsed from the `json` string. This is the inversion of the [`MultiType.prototype.toJSON()`](#multitypetojson) method
+
+#### `MultiType.getType(value)`
+Returns a string representing the type of the given `value`
+
+Example:
+```js
+> MultiType.getType([])
+< "array"
+```
+
+#### `MultiType.isType(value, type)`
+Returns `true` if the given `value` matches the type of `type`, `false` otherwise.
+
+Example:
+```js
+> MultiType.isType("a string", "string")
+< true
+```
+
+#### `MultiType.getRepresentative(type)`
+Returns a value that can be used as a representative of the given `type`
+
+Example:
+```js
+> MultiType.getRepresentative("object")
+< {}
+```
 ### Sensitive functions
 ```js
-Array.isArray
+Number
+BigInt
+String
+Boolean
+Array
+Function
+Symbol
+Object
 Error
-*.prototype.toString
-WeakMap
-Object.prototype.toString.call
-Object.keys
 ```
-if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/ObjectFinder/JS/ObjectFinder.util.js).
