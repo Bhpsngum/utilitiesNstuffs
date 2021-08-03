@@ -60,11 +60,14 @@
         return isType(t[type], type)
       },
       toString: function toString () {
-        let y = t.string;
-        return isType(y,"string")?y:this.toJSON()
+        for (let type of ["string","number","array","boolean","function","symbol","bigint","multi","object"]) try { 
+          let val = t[type];
+          if (isType(val,type)) return val.toString()
+        } catch (e) {}
+        return this.toJSON()
       },
       [Symbol.toPrimitive]: function() {
-        for (let type of ["number","bigint","string","boolean","array","multi","function","symbol","object"]) try{ 
+        for (let type of ["number","bigint","string","boolean","array","multi","function","symbol","object"]) try { 
           let val = t[type];
           if (isType(val,type) && isType(+val,"number")) return +val
         } catch (e) {}
