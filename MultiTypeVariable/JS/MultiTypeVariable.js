@@ -1,6 +1,8 @@
 ;(function(){
   var types = ["object","string","number","array","symbol","boolean","multi","function","bigint"], nullish = ["null","undefined"], all_types = [...types, ...nullish], isNullish = function(type) {
     return nullish.indexOf(type) != -1
+  }, isType = function isType (value, type) {
+    return getType(value) == checkType(type)
   }, getType = function getType (value) {
     var type = typeof value;
     if (type == "object") switch (true) {
@@ -13,7 +15,7 @@
   }, throwError = function(name,args,isMore) {
     if (args.length === 0) throw new TypeError(`Failed to execute '${name}' on 'MultiType':${isMore?" at least":""} 1 argument required, but only 0 present.`);
   }, checkEmpty = function(obj) {
-    for (let i of types) if (getType(obj[i]) == i) return false;
+    for (let i of types) if (isType(obj[i], i)) return false;
     for (let i of nullish) if (obj[i] === true) return false;
     return true
   }, checkType = function(type) {
@@ -55,20 +57,20 @@
         throwError("has",arguments);
         type = checkType(type);
         if (isNullish(type)) return t[type] === true;
-        return getType(t[type]) == type;
+        return isType(t[type], type)
       },
       toString: function toString () {
         let y = t.string;
-        return typeof y == "string"?y:JSON.stringify(this);
+        return isType(y,"string")?y:this.toJSON()
       },
       valueOf: function valueOf () {
-        let n = t.number;
-        return typeof n == "number"?n:this;
+        for (let type of ["number","bigint","string","boolean","array","multi","function","symbol","object"]) try{ if (isType(t[type],type) && isType(+t[type],"number")) return t[type] } catch (e) {}
+        return null
       },
       toJSON: function toJSON () {
         var json = {};
         for (let i of types) try {
-          if (t[i] !== void 0) {
+          if (isType(t[i],i)) {
             switch(i) {
               case "multi":
                 let f = {class:"MultiType"};
@@ -92,7 +94,7 @@
       }
     });
     for (let i of types) Object.defineProperty(this, i, {
-      get() {return (getType(t[i]) == i)?t[i]:void 0}
+      get() {return isType(t[i], i)?t[i]:void 0}
     });
     Object.defineProperty(this, 'isEmpty', {
       get() {return checkEmpty(t)}
@@ -111,11 +113,10 @@
       value: "MultiType"
     }
   });
-  MultiType.prototype = proto;
   var getRepresentative = function getRepresentative (type) {
     return [{},"",0,[],Symbol(),false,new MultiType,function(){},0n,null,undefined][all_types.indexOf(checkType(type))]
   }
-  MultiType.parseJSON = function parseJSON (json) {
+  var parseJSON = function parseJSON (json) {
     json = JSON.parse(json);
     let m = new MultiType(), circular = false;
     if (json.class == "MultiType" && json.values && typeof json.values == "object") {
@@ -126,7 +127,7 @@
             case "multi":
               if (v.class == "MultiType") {
                 if (v.circular === true) m.set(m);
-                else m.set(MultiType.parseJSON(JSON.stringify(v)))
+                else m.set(parseJSON(JSON.stringify(v)))
               }
               break;
             case "bigint":
@@ -136,7 +137,7 @@
               if (v.class == "Symbol") m.set(Symbol(v.description));
               break;
             default:
-              if (getType(v) == i) m.set(v)
+              if (isType(v, i)) m.set(v)
           }
         }
       } catch(e) {}
@@ -144,7 +145,10 @@
     }
     return m;
   }
+  MultiType.prototype = proto;
   MultiType.getType = getType;
+  MultiType.isType = isType;
   MultiType.getRepresentative = getRepresentative;
+  MultiType.parseJSON = parseJSON;
   window.MultiType = MultiType
 })();
