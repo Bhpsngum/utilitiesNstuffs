@@ -63,8 +63,11 @@
         let y = t.string;
         return isType(y,"string")?y:this.toJSON()
       },
-      valueOf: function valueOf () {
-        for (let type of ["number","bigint","string","boolean","array","multi","function","symbol","object"]) try{ if (isType(t[type],type) && isType(+t[type],"number")) return t[type] } catch (e) {}
+      [Symbol.toPrimitive]: function() {
+        for (let type of ["number","bigint","string","boolean","array","multi","function","symbol","object"]) try{ 
+          let val = t[type];
+          if (isType(val,type) && isType(+val,"number")) return +val
+        } catch (e) {}
         return null
       },
       toJSON: function toJSON () {
