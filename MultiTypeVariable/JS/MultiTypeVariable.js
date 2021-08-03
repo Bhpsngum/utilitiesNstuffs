@@ -70,10 +70,9 @@
         let n = t.number;
         return typeof n == "number"?n:this;
       },
-      [Symbol.toStringTag]: "MultiType",
       toJSON: function toJSON () {
         var json = {};
-        for (let i of types) {
+        for (let i of types) try {
           if (t[i] !== void 0) {
             switch(i) {
               case "multi":
@@ -82,11 +81,17 @@
                 else f = JSON.parse(JSON.stringify(t[i]));
                 json[i] = f;
                 break;
+              case "bigint":
+                json[i] = {class: "BigInt", value: t[i].toString()}
+                break;
+              case "symbol":
+                json[i] = {class: "Symbol", description: t[i].description}
+                break;
               default:
                 json[i] = t[i];
             }
           }
-        }
+        } catch(e) {}
         for (let i of nullish) if (t[i] == true) json[i] = true;
         return {class:"MultiType",values:json};
       }
@@ -97,15 +102,20 @@
     Object.defineProperty(this, 'isEmpty', {
       get() {return checkEmpty(t)}
     })
-  }, proto = new multiType;
+  }, proto = {};
   var MultiType = function MultiType () {
     let m = new multiType(...arguments);
     Object.setPrototypeOf(m, proto);
     if (new.target != undefined) Object.assign(this, m);
     return m;
   }
-  Object.setPrototypeOf(proto, Object.prototype);
+  Object.assign(proto, new MultiType);
   proto.constructor = MultiType;
+  Object.defineProperties(proto, {
+    [Symbol.toStringTag]: {
+      value: "MultiType"
+    }
+  });
   MultiType.prototype = proto;
   var getRepresentative = function getRepresentative (type) {
     return [{},"",0,[],Symbol(),false,new MultiType,function(){},0n,null,undefined][all_types.indexOf(checkType(type))]
@@ -114,23 +124,28 @@
     json = JSON.parse(json);
     let m = new MultiType(), circular = false;
     if (json.class == "MultiType" && json.values && typeof json.values == "object") {
-      for (let i of types) {
+      for (let i of types) try {
         if (json.values.hasOwnProperty(i)) {
           let v = json.values[i];
           switch (i) {
             case "multi":
-              if (v.class="MultiType") {
+              if (v.class == "MultiType") {
                 if (v.circular === true) m.set(m);
                 else m.set(MultiType.parse(JSON.stringify(v)))
               }
+              break;
+            case "bigint":
+              if (v.class == "BigInt") m.set((0n).constructor(v.value));
+              break;
+            case "symbol":
+              if (v.class == "Symbol") m.set(Symbol(v.description));
               break;
             default:
               if (getType(v) == i) m.set(v)
           }
         }
-      }
-      var nullish_vals = [null, void 0];
-      nullish.forEach(function(i,j){if (json.values[i]) m.set(nullish_vals[j])});
+      } catch(e) {}
+      for (let i of nullish) if (json.values[i] === true) m.set(getRepresentative(i));
     }
     return m;
   }
