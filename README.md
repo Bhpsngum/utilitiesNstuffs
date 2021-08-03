@@ -337,3 +337,112 @@ Object.prototype.toString.call
 Object.keys
 ```
 if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/ObjectFinder/JS/ObjectFinder.util.js).
+
+## [MultiTypeVariable](/MultiTypeVariable/JS/MultiTypeVariable.js)
+A variable that can act as various types
+### Languages
+[JavaScript (ECMAScript)](/MultiTypeVariable/JS/MultiTypeVariable.js)
+
+### Requirements
+* ECMAScript version: ES2020 or higher
+
+### Syntax
+`new MultiType(...values)` or `MultiType(...values)` where `...values` is the list of parameters in various types
+Example:
+```js
+var multiType = new MultiType({},"",0,[],false,function(){},Symbol(),0n,new MultiType,null,undefined)
+```
+
+### Return value
+New `MultiType` variable
+
+### Supported Types
+#### Nullish types
+|Type|Representative Value|
+|-|-|
+|null|`null`|
+|undefined|`undefined`|
+#### Other types
+|Type|Representative Constructor|Representative Value|
+|-|-|-|
+|object|`Object`|`{}`|
+|string|`String`|`""`|
+|number|`Number`|`0`|
+|array|`Array`|`[]`|
+|boolean|`Boolean`|`false`|
+|function|`Function`|`function(){}`|
+|symbol|`Symbol`|`Symbol()`|
+|bigint|`BigInt`|`0n`|
+|multi|`MultiType`|`new MultiType`|
+
+### Properties
+**Note:** All of the properties listed here are immutable
+
+#### `multiType.isEmpty`
+Represent if the variable is empty (doesn't contain any values) or not
+
+#### Value by types
+Uses: `multiType[type]`. For example: `multiType['number']`
+
+### Methods
+
+#### `multiType.set(...values)`
+
+Set list of `values` to the variable. Requires at least 1 argument.
+Example:
+```js
+multiType.set(1,"1",[1])
+```
+
+#### `multiType.get(value_type)`
+Get value of `type` stored on the variable. Requires 1 argument.
+Returns the value of the given `type` or `undefined` if none found
+**Note:** Calling this method with nullish types will return the same result as `multiType.has(type)`
+Example:
+```js
+> multiType.get("number")
+< 1
+```
+
+#### `multiType.has(type)`
+Check if the variable has any value with the type `type`
+Returns `true` if the variable contains a value with the given type, `false` otherwise
+Example:
+```js
+> multiType.has("string")
+< true
+```
+
+#### `multiType.remove(type)`
+Remove the value of the specified `type` from the variable
+Example:
+```js
+multiType.remove("array")
+```
+
+#### `multiType.clear()`
+Remove all values from the variable. `multiType.isEmpty` will return `true` after this method
+
+#### `multiType.toJSON()`
+Transform the variable into a MultiType-encoded JSON string, which can be parsed back as a new MultiType variable using `MultiType.parseJSON(json)`
+Example:
+```js
+> JSON.stringify(multiType)
+< `{"class":"MultiType","values":{}}`
+```
+
+**Note:** Only `function` type can't be preserved through this conversion.
+
+#### `multiType.toString()`
+Returns the `multiType.string` value if it does have a `string` type value, `multiType.toJSON()` otherwise
+
+### Sensitive functions
+```js
+Array.isArray
+Error
+*.prototype.toString
+WeakMap
+Object.prototype.toString.call
+Object.keys
+```
+if you're ensure that your project/codes won't mess up any built-in functions, use the [utilised version](/ObjectFinder/JS/ObjectFinder.util.js).

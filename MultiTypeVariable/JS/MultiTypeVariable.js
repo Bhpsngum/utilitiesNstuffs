@@ -115,7 +115,7 @@
   var getRepresentative = function getRepresentative (type) {
     return [{},"",0,[],Symbol(),false,new MultiType,function(){},0n,null,undefined][all_types.indexOf(checkType(type))]
   }
-  MultiType.parse = function parse (json) {
+  MultiType.parseJSON = function parseJSON (json) {
     json = JSON.parse(json);
     let m = new MultiType(), circular = false;
     if (json.class == "MultiType" && json.values && typeof json.values == "object") {
@@ -126,11 +126,11 @@
             case "multi":
               if (v.class == "MultiType") {
                 if (v.circular === true) m.set(m);
-                else m.set(MultiType.parse(JSON.stringify(v)))
+                else m.set(MultiType.parseJSON(JSON.stringify(v)))
               }
               break;
             case "bigint":
-              if (v.class == "BigInt") m.set((0n).constructor(v.value));
+              if (v.class == "BigInt") m.set(BigInt(v.value));
               break;
             case "symbol":
               if (v.class == "Symbol") m.set(Symbol(v.description));
