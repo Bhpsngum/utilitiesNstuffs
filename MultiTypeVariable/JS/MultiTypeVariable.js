@@ -13,14 +13,9 @@
   }, throwError = function(name,args,isMore) {
     if (args.length === 0) throw new TypeError(`Failed to execute '${name}' on 'MultiType':${isMore?" at least":""} 1 argument required, but only 0 present.`);
   }, checkEmpty = function(obj) {
-    var t = [];
-    for (let i of types) {
-      let check = getType(obj[i]) == i;
-      if (!check) delete obj[i];
-      t.push(Number(check));
-    }
-    for (let i of nullish) t.push(obj[i] === true);
-    return !Math.max(...t)
+    for (let i of types) if (getType(obj[i]) == i) return false;
+    for (let i of nullish) if (obj[i] === true) return false;
+    return true
   }, checkType = function(type) {
     var t = (type || "").toString().toLowerCase();
     if (all_types.indexOf(t) == -1) throw new TypeError("Invalid variable type");
@@ -97,7 +92,7 @@
       }
     });
     for (let i of types) Object.defineProperty(this, i, {
-      get() {return t[i]}
+      get() {return (getType(t[i]) == i)?t[i]:void 0}
     });
     Object.defineProperty(this, 'isEmpty', {
       get() {return checkEmpty(t)}
@@ -106,7 +101,7 @@
   var MultiType = function MultiType () {
     let m = new multiType(...arguments);
     Object.setPrototypeOf(m, proto);
-    if (new.target != undefined) Object.assign(this, m);
+    if (new.target != void 0) Object.assign(this, m);
     return m;
   }
   Object.assign(proto, new MultiType);
