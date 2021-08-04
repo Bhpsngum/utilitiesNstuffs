@@ -395,7 +395,7 @@ Example:
 
 #### `multiType.toString()`
 It will try to convert the value to string of those types (prioritise from first to last), if the value is present and the value can be converted then it returns the converted value, otherwise it goes to the next type in the list:
-|`string` --> `number` --> `array` --> `boolean` --> `function` `regexp` --> `date` --> `error` --> `symbol` --> `bigint` --> `multi` --> `object`|
+|`string` --> `number` --> `array` --> `boolean` --> `function` --> `regexp` --> `date` --> `error` --> `symbol` --> `bigint` --> `multi` --> `object`|
 |-|
 
 Returns `JSON.stringify(multiType)` if the above check fails.
