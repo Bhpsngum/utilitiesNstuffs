@@ -1,15 +1,17 @@
 ;(function(){
-  var types = ["object","string","number","array","symbol","boolean","multi","function","bigint"], nullish = ["null","undefined"], all_types = [...types, ...nullish], isNullish = function(type) {
+  var global = window, types = ["object","string","number","array","symbol","date","regexp","error","boolean","multi","function","bigint"], nullish = ["null","undefined"], all_types = [...types, ...nullish], isNullish = function(type) {
     return nullish.indexOf(type) != -1
   }, isType = function isType (value, type) {
     return getType(value) == checkType(type)
   }, getType = function getType (value) {
-    var type = typeof value;
+    var type = typeof value, deeptype;
     if (type == "object") switch (true) {
       case value === null: return "null";
       case Array.isArray(value): return "array";
-      case value instanceof MultiType: return "multi";
-      default: return type;
+      default: switch (deeptype = Object.prototype.toString.call(value).slice(8,-1).toLowerCase()) {
+        case "multitype": return "multi";
+        default: return types.indexOf(deeptype) != -1 ? deeptype : type
+      }
     }
     return type;
   }, throwError = function(name,args,isMore) {
@@ -60,14 +62,14 @@
         return isType(t[type], type)
       },
       toString: function toString () {
-        for (let type of ["string","number","array","boolean","function","symbol","bigint","multi","object"]) try { 
+        for (let type of ["string","number","array","boolean","function","regexp","date","error","symbol","bigint","multi","object"]) try { 
           let val = t[type];
           if (isType(val,type)) return val.toString()
         } catch (e) {}
         return JSON.stringify(this)
       },
       [Symbol.toPrimitive]: function() {
-        for (let type of ["number","bigint","string","boolean","array","multi","function","symbol","object"]) try { 
+        for (let type of ["number","bigint","string","boolean","array","date","multi","function","regexp","error","symbol","object"]) try { 
           let val = t[type];
           if (isType(val,type) && isType(+val,"number")) return +val
         } catch (e) {}
@@ -89,6 +91,15 @@
                 break;
               case "symbol":
                 json[i] = {class: "Symbol", description: t[i].description}
+                break;
+              case "regexp":
+                json[i] = {class: "RegExp", source: t[i].source, flags: t[i].flags}
+                break;
+              case "error":
+                json[i] = {class: "Error", name: t[i].name, message: t[i].message}
+                break;
+              case "date":
+                json[i] = {class: "Date", value: t[i].toJSON()}
                 break;
               default:
                 json[i] = t[i];
@@ -120,7 +131,7 @@
     }
   });
   var getRepresentative = function getRepresentative (type) {
-    return [{},"",0,[],Symbol(),false,new MultiType,function(){},0n,null,undefined][all_types.indexOf(checkType(type))]
+    return [{},"",0,[],Symbol(),new Date,/(?:)/,new Error,false,new MultiType,function(){},0n,null,undefined][all_types.indexOf(checkType(type))]
   }
   var parseJSON = function parseJSON (json) {
     json = JSON.parse(json);
@@ -142,6 +153,15 @@
             case "symbol":
               if (v.class == "Symbol") m.set(Symbol(v.description));
               break;
+            case "date":
+              if (v.class == "Date") m.set(Date.parse(v.value));
+              break;
+            case "regexp":
+              if (v.class == "RegExp") m.set(new RegExp(v.source,v.flags));
+              break;
+            case "error":
+              if (v.class == "Error") typeof global[v.name] && m.set(new global[v.name](v.message));
+              break;
             default:
               if (isType(v, i)) m.set(v)
           }
@@ -156,5 +176,5 @@
   MultiType.isType = isType;
   MultiType.getRepresentative = getRepresentative;
   MultiType.parseJSON = parseJSON;
-  window.MultiType = MultiType
+  global.MultiType = MultiType
 })();
