@@ -447,5 +447,7 @@ Array
 Function
 Symbol
 Object
+Date
+RegExp
 Error
 ```
