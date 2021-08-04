@@ -321,6 +321,9 @@ New `MultiType` variable
 |array|`Array`|`[]`|
 |boolean|`Boolean`|`false`|
 |function|`Function`|`function(){}`|
+|regexp|`RegExp`|`/(?:)/`|
+|date|`Date`|`new Date`|
+|error|`Error`|`new Error`|
 |symbol|`Symbol`|`Symbol()`|
 |bigint|`BigInt`|`0n`|
 |multi|`MultiType`|`new MultiType`|
@@ -392,13 +395,13 @@ Example:
 
 #### `multiType.toString()`
 It will try to convert the value to string of those types (prioritise from first to last), if the value is present and the value can be converted then it returns the converted value, otherwise it goes to the next type in the list:
-|`string` --> `number` --> `array` --> `boolean` --> `function` --> `symbol` --> `bigint` --> `multi` --> `object`|
+|`string` --> `number` --> `array` --> `boolean` --> `function` `regexp` --> `date` --> `error` --> `symbol` --> `bigint` --> `multi` --> `object`|
 |-|
 
 Returns `JSON.stringify(multiType)` if the above check fails.
 #### `multiType[Symbol.toPrimitive]()` (to primitive value)
 It will try to convert the value to number of those types (prioritise from first to last), if the value is present and the converted value is a number then it returns the converted value, otherwise it goes to the next type in the list:
-|`number` --> `bigint` --> `string` --> `boolean` --> `array` --> `multi` --> `function` --> `symbol` --> `object`|
+|`number` --> `bigint` --> `string` --> `boolean` --> `array` --> `date` --> `multi` --> `function` --> `regexp` --> `error` --> `symbol` --> `object`|
 |-|
 
 Returns `null` if the above check fails.
