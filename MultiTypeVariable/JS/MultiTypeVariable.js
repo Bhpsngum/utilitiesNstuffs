@@ -139,7 +139,7 @@
     if (json.class == "MultiType" && json.values && typeof json.values == "object") {
       for (let i of types) try {
         if (json.values.hasOwnProperty(i)) {
-          let v = json.values[i];
+          let v = json.values[i],temp;
           switch (i) {
             case "multi":
               if (v.class == "MultiType") {
@@ -148,23 +148,27 @@
               }
               break;
             case "bigint":
-              if (v.class == "BigInt") m.set(BigInt(v.value));
+              if (v.class == "BigInt") temp = BigInt(v.value);
               break;
             case "symbol":
-              if (v.class == "Symbol") m.set(Symbol(v.description));
+              if (v.class == "Symbol") temp = Symbol(v.description);
               break;
             case "date":
-              if (v.class == "Date") m.set(Date.parse(v.value));
+              if (v.class == "Date") temp = new Date(Date.parse(v.value));
               break;
             case "regexp":
-              if (v.class == "RegExp") m.set(new RegExp(v.source,v.flags));
+              if (v.class == "RegExp") temp = new RegExp(v.source,v.flags);
               break;
             case "error":
-              if (v.class == "Error") typeof global[v.name] && m.set(new global[v.name](v.message));
+              if (v.class == "Error") {
+                temp = new Error(v.message);
+                temp.name = v.name
+              }
               break;
             default:
-              if (isType(v, i)) m.set(v)
+              temp = v;
           }
+          isType(temp, i) && m.set(temp);
         }
       } catch(e) {}
       for (let i of nullish) if (json.values[i] === true) m.set(getRepresentative(i));
