@@ -96,7 +96,7 @@
                 json[i] = {class: "RegExp", source: t[i].source, flags: t[i].flags}
                 break;
               case "error":
-                json[i] = {class: "Error", name: t[i].name, message: t[i].message}
+                json[i] = {class: "Error", name: t[i].name, message: t[i].message, stack: t[i].stack}
                 break;
               case "date":
                 json[i] = {class: "Date", value: t[i].toJSON()}
@@ -162,7 +162,8 @@
             case "error":
               if (v.class == "Error") {
                 temp = new Error(v.message);
-                temp.name = v.name
+                temp.name = v.name;
+                temp.stack = v.stack;
               }
               break;
             default:
