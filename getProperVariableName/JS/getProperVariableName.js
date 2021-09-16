@@ -101,7 +101,7 @@ String.prototype.getProperJSVariableName = function getProperJSVariableName()
     if (!err) inp="_"+inp;
   }
   var temp=window[inp];
-  window[inp]=window[inp]+1;
+  window[inp]={};
   let opt={name:inp,mutable:!(temp == window[inp]||inp == "NaN"),proper:this+""==inp};
   if (!opt.mutable)
   {
