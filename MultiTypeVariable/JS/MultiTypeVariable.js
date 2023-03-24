@@ -61,15 +61,19 @@
         if (isNullish(type)) return t[type] === true;
         return isType(t[type], type)
       },
+      nullify: function () {
+        this.set.apply(this, getNullishValues());
+        return this
+      },
       toString: function toString () {
-        for (let type of ["string","number","array","boolean","function","regexp","date","error","symbol","bigint","multi","object"]) try { 
+        for (let type of ["string","number","array","boolean","function","regexp","date","error","symbol","bigint","multi","object"]) try {
           let val = t[type];
           if (isType(val,type)) return val.toString()
         } catch (e) {}
         return JSON.stringify(this)
       },
       [Symbol.toPrimitive]: function() {
-        for (let type of ["number","bigint","string","boolean","array","date","multi","function","regexp","error","symbol","object"]) try { 
+        for (let type of ["number","bigint","string","boolean","array","date","multi","function","regexp","error","symbol","object"]) try {
           let val = t[type];
           if (isType(val,type) && isType(+val,"number")) return +val
         } catch (e) {}
@@ -130,8 +134,11 @@
       value: "MultiType"
     }
   });
+  var getNullishValues = function () {
+    return [{},"",0,[],Symbol(),new Date,/(?:)/,new Error,false,new MultiType,function(){},0n,null,undefined]
+  }
   var getRepresentative = function getRepresentative (type) {
-    return [{},"",0,[],Symbol(),new Date,/(?:)/,new Error,false,new MultiType,function(){},0n,null,undefined][all_types.indexOf(checkType(type))]
+    return getNullishValues()[all_types.indexOf(checkType(type))]
   }
   var parseJSON = function parseJSON (json) {
     json = JSON.parse(json);
